@@ -1,0 +1,68 @@
+{
+    "app_name": "Werwolf App",
+    "player": "Spieler",
+    "create_game": "Spiel erstellen",
+    "no_roles": "Keine Rollen ausgewählt",
+    "overview": "Übersicht",
+    "player_overview": "Spielerübersicht",
+    "edit_player": "Spieler bearbeiten",
+    "player_name": "Spielername",
+    "show_role_message": "Der Spieler \"{name}\" hat die Rolle \"{role}\"",
+    "note": {
+        "one": "Notiz",
+        "two": "Notizen",
+        "many": "Notizen",
+        "other": "Notizen"
+    },
+    "edit_properties": "Eigenschaften bearbeiten",
+    "message": "Nachricht",
+    "ask": "Frage",
+    "village": "Dorf",
+    "selection": {
+        "select_player": "Spieler auswählen",
+        "select_player_lynch": "Lynchen",
+        "first_fall_in_love": "Verlieben (1)",
+        "second_fall_in_love": "Verlieben (2)",
+        "protect_player": "Schützen",
+        "hunter_kill": "Von Jäger getötet",
+        "select_player_kill": "Töten",
+        "see_player_role": "Rolle sehen"
+    },
+    "property": {
+        "kills": "Todestränke",
+        "heals": "Heiltränke",
+        "wakesUpEveryXNight": "Wird jede X.Nacht aufgeweckt",
+        "leftWakeUps": "Anzahl der verbleibenden Weckrufe"
+    },
+    "option": {
+        "kill": "Töten",
+        "heal": "Heilen",
+        "skip": "Überspringen",
+        "save": "Speichern",
+        "cancel": "Abbrechen",
+        "accept": "OK"
+    },
+    "error": {
+        "min_player_count_must_be_reached": "Es müssen mindestens 5 Spieler ausgewählt werden, um ein Spiel zu starten.",
+        "armor_same_player_selected": "Einfach nein..."
+    },
+    "role": {
+        "armor": "Armor",
+        "blink_girl": "Blinzelmädchen",
+        "bodyguard": "Bodyguard",
+        "gerber": "Gerber",
+        "hunter": "Jäger",
+        "idiot": "Idiot",
+        "lykanthropin": "Lykanthropin",
+        "mage": "Magier",
+        "pacifist": "Pazifist",
+        "priest": "Priester",
+        "prince": "Prinz",
+        "seer": "Seher",
+        "seerin": "Seherin",
+        "vampire": "Vampir",
+        "villager": "Dorfbewohner",
+        "werewolf": "Werwolf",
+        "witch": "Hexe"
+    }
+}

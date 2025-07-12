@@ -1,0 +1,68 @@
+{
+    "app_name": "Werewolf App",
+    "player": "Player",
+    "create_game": "Create Game",
+    "no_roles": "No roles selected",
+    "overview": "Overview",
+    "player_overview": "Player Overview",
+    "edit_player": "Edit Player",
+    "player_name": "Player Name",
+    "show_role_message": "The player \"{name}\" has the role \"{role}\"",
+    "note": {
+        "one": "Note",
+        "two": "Notes",
+        "many": "Notes",
+        "other": "Notes"
+    },
+    "edit_properties": "Edit Properties",
+    "message": "Message",
+    "ask": "Question",
+    "village": "Village",
+    "selection": {
+        "select_player": "Select Player",
+        "select_player_lynch": "Lynch",
+        "first_fall_in_love": "Fall in Love (1)",
+        "second_fall_in_love": "Fall in Love (2)",
+        "protect_player": "Protect",
+        "hunter_kill": "Killed by Hunter",
+        "select_player_kill": "Kill",
+        "see_player_role": "See Role"
+    },
+    "property": {
+        "kills": "Death Potions",
+        "heals": "Healing Potions",
+        "wakesUpEveryXNight": "Wakes up every X night",
+        "leftWakeUps": "Number of remaining wake-ups"
+    },
+    "option": {
+        "kill": "Kill",
+        "heal": "Heal",
+        "skip": "Skip",
+        "save": "Save",
+        "cancel": "Cancel",
+        "accept": "OK"
+    },
+    "error": {
+        "min_player_count_must_be_reached": "At least 5 players must be selected to start a game.",
+        "armor_same_player_selected": "Just no..."
+    },
+    "role": {
+        "armor": "Armor",
+        "blink_girl": "Blink Girl",
+        "bodyguard": "Bodyguard",
+        "gerber": "Gerber",
+        "hunter": "Hunter",
+        "idiot": "Idiot",
+        "lykanthropin": "Lycanthrope",
+        "mage": "Mage",
+        "pacifist": "Pacifist",
+        "priest": "Priest",
+        "prince": "Prince",
+        "seer": "Seer",
+        "seerin": "Seer (female)",
+        "vampire": "Vampire",
+        "villager": "Villager",
+        "werewolf": "Werewolf",
+        "witch": "Witch"
+    }
+}
