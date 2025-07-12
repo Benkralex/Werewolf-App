@@ -1,8 +1,8 @@
 name: werewolf_app
-description: "A new Flutter project."
+description: "This is an app, that should help moderators of the Werewolf game to keep track of the roles, deaths and so on."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0-beta
 
 environment:
   sdk: ^3.8.1

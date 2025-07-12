@@ -1,6 +1,6 @@
 {
-    "name": "Werewolf App",
-    "short_name": "Werewolf App",
+    "name": "Werewolf",
+    "short_name": "Werewolf",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#000000",
