@@ -1,4 +1,4 @@
-![Werewolf Game Header](./assets/werewolf.jpg)
+![Werewolf Game Header](./git-assets/werewolf.jpg)
 # Werewolf App
 This is an app, that should help moderators of the Werewolf game to keep track of the roles, deaths and so on.
 ## Story
