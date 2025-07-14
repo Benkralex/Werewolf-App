@@ -97,6 +97,7 @@ class GameController {
     p.isAlive = false;
     await p.role.onDeath(this, p);
     if (p.isAlive) return;
+    showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name}));
     for (Player p in p.killsOnDeath) {
       if (!p.isAlive) continue;
       killPlayerNow(p);

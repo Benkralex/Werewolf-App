@@ -27,7 +27,7 @@ class Hunter extends Role {
 
   @override
   Future<void> onDeath(GameController game, Player p) async {
-    Player target = await game.selectPlayer(game.alivePlayers, "selection.hunter_kill", p);
+    Player target = await game.selectPlayer(game.alivePlayers.where((i) => i != p).toList(), "selection.hunter_kill", p);
     target.killedBy = p;
     game.killPlayerNow(target);
     if (target.isAlive) target.killedBy = null;

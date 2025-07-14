@@ -79,5 +79,6 @@
         "withWerewolfs": "With Werewolves",
         "afterWerewolfs": "After Werewolves"
     },
-    "win_msg": "The game is finished. {winner} has won!"
+    "win_msg": "The game is finished. {winner} has won!",
+    "player_dies": "The player {player} dies. Their role was {role}."
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/game/game_time.dart';
 import 'package:werewolf_app/model/player/player.dart';
@@ -41,7 +42,7 @@ class Armor extends Role {
     Player target1 = await game.selectPlayer(game.alivePlayers, "selection.first_fall_in_love", p);
     Player target2 = await game.selectPlayer(game.alivePlayers, "selection.second_fall_in_love", p);
     if (target1 == target2) {
-      game.showMessage("error.armor_same_player_selected");
+      game.showMessage("error.armor_same_player_selected".tr());
       return;
     }
     target1.killsOnDeath.add(target2);
