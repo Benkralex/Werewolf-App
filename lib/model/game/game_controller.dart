@@ -72,6 +72,7 @@ class GameController {
       p.isAlive = false;
       p.role.onLynch(this, p);
       if (p.isAlive) return;
+      showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}));
       for (Player p2 in p.killsOnDeath) {
         if (!p2.isAlive) continue;
         killPlayerNow(p2);
@@ -97,7 +98,7 @@ class GameController {
     p.isAlive = false;
     await p.role.onDeath(this, p);
     if (p.isAlive) return;
-    showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name}));
+    showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}));
     for (Player p in p.killsOnDeath) {
       if (!p.isAlive) continue;
       killPlayerNow(p);
