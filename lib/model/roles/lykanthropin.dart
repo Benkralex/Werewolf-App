@@ -28,7 +28,7 @@ class Lykanthropin extends Role {
 
   @override
   Future<void> onDeath(GameController game, Player p) async {
-    if (p.killedBy!.role == Werewolf()) {
+    if (p.killedBy!.role.group == 'werewolf') {
       p.role = Werewolf();
       p.isAlive = true;
       p.killedBy = null;

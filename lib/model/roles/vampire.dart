@@ -35,7 +35,7 @@ class Vampire extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    Player target = await game.selectPlayer(game.players, "selection.select_player_kill", p);
+    Player target = await game.selectPlayer(game.players.where((i) => i.role.group != 'vampire').toList(), "selection.select_player_kill", p);
     game.killPlayer(target, p, GameTime.sunset);
   }
 
