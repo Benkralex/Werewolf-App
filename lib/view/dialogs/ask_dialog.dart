@@ -21,7 +21,7 @@ class _AskDialogState extends State<AskDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('ask').tr(),
+      title: Text('dialog_title.ask').tr(),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

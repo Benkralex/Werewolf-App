@@ -15,8 +15,11 @@
         "other": "Notizen"
     },
     "edit_properties": "Eigenschaften bearbeiten",
-    "message": "Nachricht",
-    "ask": "Frage",
+    "dialog_title": {
+        "message": "Nachricht",
+        "ask": "Frage",
+        "game_finished": "Spiel beendet"
+    },
     "village": "Dorf",
     "selection": {
         "select_player": "Spieler auswählen",
@@ -40,7 +43,9 @@
         "skip": "Überspringen",
         "save": "Speichern",
         "cancel": "Abbrechen",
-        "accept": "OK"
+        "accept": "OK",
+        "next": "Weiter",
+        "new_game": "Neues Spiel"
     },
     "error": {
         "min_player_count_must_be_reached": "Es müssen mindestens 5 Spieler ausgewählt werden, um ein Spiel zu starten.",
@@ -64,5 +69,15 @@
         "villager": "Dorfbewohner",
         "werewolf": "Werwolf",
         "witch": "Hexe"
-    }
+    },
+    "gametime": {
+        "day": "Tag",
+        "night": "Nacht",
+        "sunrise": "Sonnenaufgang",
+        "sunset": "Sonnenuntergang",
+        "preWerewolfs": "Vor den Werwölfen",
+        "withWerewolfs": "Mit den Werwölfen",
+        "afterWerewolfs": "Nach den Werwölfen"
+    },
+    "win_msg": "Das Spiel ist beendet. {winner} hat gewonnen!"
 }

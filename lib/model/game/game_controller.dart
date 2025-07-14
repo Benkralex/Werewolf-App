@@ -47,7 +47,6 @@ class GameController {
   }
 
   Future<void> update() async {
-    print(gameState.time);
     await unalivePlayers();
     updatePlayerProtection();
     await lynchPlayer();

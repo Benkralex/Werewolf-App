@@ -62,15 +62,15 @@ class GameTime {
   @override
   String toString() {
     if (isSunrise) {
-      return "Sunrise";
+      return "sunrise";
     } else if (isSunset) {
-      return "Sunset";
+      return "sunset";
     } else if (isPreWerewolfs) {
-      return "PreWerewolfs";
+      return "preWerewolfs";
     } else if (isWithWerewolfs) {
-      return "WithWerewolfs";
+      return "withWerewolfs";
     } else if (isAfterWerewolfs) {
-      return "AfterWerewolfs";
+      return "afterWerewolfs";
     } else {
       throw Exception("Unknown phase");
     }

@@ -11,8 +11,8 @@ Future<void> main() async {
   
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('de', 'DE')], //Locale('en', 'US'), 
-      path: 'assets/translations', // <-- change the path of the translation files 
+      supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
+      path: 'assets/translations',
       fallbackLocale: Locale('de', 'DE'),
       child: WerewolfApp()
     ),

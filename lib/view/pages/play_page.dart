@@ -51,7 +51,50 @@ class PlayPageState extends State<PlayPage> {
           ),
         ],
       ),
-      body: ElevatedButton(onPressed: () => {ViewModel.gameController!.next()}, child: const Text('next')),
+      body: Center(
+        child: Text(
+          'gametime.${ViewModel.gameController!.gameState.time.toString()}'.tr(),
+          style: Theme.of(context).textTheme.headlineMedium,
+          textAlign: TextAlign.center,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          bool gameFinished = ViewModel.gameController!.gameState.gameFinished;
+          if (!gameFinished) {
+            setState(() {
+              ViewModel.gameController!.next();            
+            });
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('dialog_title.game_finished').tr(),
+                  content: Text('win_msg'.tr(namedArgs: {
+                    'winner': ViewModel.gameController!.gameState.winningGroups.join(", ")
+                  })),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('option.new_game').tr(),
+                      onPressed: () async {
+                        await Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/',
+                          (Route<dynamic> route) => false,
+                        );
+                        ViewModel.gameController = null;
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        },
+        tooltip: 'option.next'.tr(),
+        icon: const Text('option.next').tr(),
+        label: const Icon(Icons.arrow_forward),
+      ),
     );
   }
 }

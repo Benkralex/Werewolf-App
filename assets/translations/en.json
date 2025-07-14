@@ -15,8 +15,11 @@
         "other": "Notes"
     },
     "edit_properties": "Edit Properties",
-    "message": "Message",
-    "ask": "Question",
+    "dialog_title": {
+        "message": "Message",
+        "ask": "Question",
+        "game_finished": "Game Finished"
+    },
     "village": "Village",
     "selection": {
         "select_player": "Select Player",
@@ -40,7 +43,9 @@
         "skip": "Skip",
         "save": "Save",
         "cancel": "Cancel",
-        "accept": "OK"
+        "accept": "OK",
+        "next": "Next",
+        "new_game": "New Game"
     },
     "error": {
         "min_player_count_must_be_reached": "At least 5 players must be selected to start a game.",
@@ -64,5 +69,15 @@
         "villager": "Villager",
         "werewolf": "Werewolf",
         "witch": "Witch"
-    }
+    },
+    "gametime": {
+        "day": "Day",
+        "night": "Night",
+        "sunrise": "Sunrise",
+        "sunset": "Sunset",
+        "preWerewolfs": "Pre Werewolves",
+        "withWerewolfs": "With Werewolves",
+        "afterWerewolfs": "After Werewolves"
+    },
+    "win_msg": "The game is finished. {winner} has won!"
 }

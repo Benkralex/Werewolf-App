@@ -31,7 +31,9 @@ class _SelectPlayerDialogState extends State<SelectPlayerDialog> {
                   widget.message.tr(),
                 ),
                 Text(
-                  "${widget.askingPlayer.role.name.tr()} (${widget.askingPlayer.name})",
+                  (widget.askingPlayer.role.maxPlayers > 1) 
+                    ?  widget.askingPlayer.role.name.tr()
+                    : "${widget.askingPlayer.role.name.tr()} (${widget.askingPlayer.name})",
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 16.0,
@@ -40,12 +42,6 @@ class _SelectPlayerDialogState extends State<SelectPlayerDialog> {
               ],
             ),
             automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
           ),
           Expanded(
             child: Padding(

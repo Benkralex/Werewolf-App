@@ -9,7 +9,7 @@ Future<void> msgDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('message').tr(),
+        title: Text('dialog_title.message').tr(),
         content: Text(message),
         actions: <Widget>[
           TextButton(
