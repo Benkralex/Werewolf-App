@@ -67,6 +67,7 @@ class CreateGamePageState extends State<CreateGamePage> {
 
   @override
   Widget build(BuildContext context) {
+    ViewModel.gameController = null;
     List<Widget> listTiles = roles.entries.map((entry) {
       Role role = entry.key;
       int count = entry.value;

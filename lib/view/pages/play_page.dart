@@ -59,12 +59,11 @@ class PlayPageState extends State<PlayPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
+        onPressed: () async{
           bool gameFinished = ViewModel.gameController!.gameState.gameFinished;
           if (!gameFinished) {
-            setState(() {
-              ViewModel.gameController!.next();            
-            });
+            await ViewModel.gameController!.next();            
+            setState(() {});
           } else {
             showDialog(
               context: context,
@@ -72,7 +71,7 @@ class PlayPageState extends State<PlayPage> {
                 return AlertDialog(
                   title: Text('dialog_title.game_finished').tr(),
                   content: Text('win_msg'.tr(namedArgs: {
-                    'winner': ViewModel.gameController!.gameState.winningGroups.join(", ")
+                    'winner': 'role.${ViewModel.gameController!.gameState.winningGroups.join(", ")}'.tr(),
                   })),
                   actions: <Widget>[
                     TextButton(
@@ -82,7 +81,6 @@ class PlayPageState extends State<PlayPage> {
                           '/',
                           (Route<dynamic> route) => false,
                         );
-                        ViewModel.gameController = null;
                       },
                     ),
                   ],
