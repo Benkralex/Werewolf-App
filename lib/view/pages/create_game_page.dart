@@ -17,6 +17,12 @@ class CreateGamePage extends StatefulWidget {
 class CreateGamePageState extends State<CreateGamePage> {
   Map<Role, int> roles = {};
 
+  @override
+  void initState() {
+    super.initState();
+    ViewModel.gameController = null;
+  }
+
   void _showRoleSelectionSheet() async {
     final Role? selectedRole = await showModalBottomSheet<Role>(
       showDragHandle: true,
@@ -48,8 +54,8 @@ class CreateGamePageState extends State<CreateGamePage> {
                       }).toList()
                     : [
                         Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text("no_roles"),
+                          padding: const EdgeInsets.all(16.0),
+                          child: const Text("no_roles").tr(),
                         ),
                       ],
               ),
@@ -67,7 +73,6 @@ class CreateGamePageState extends State<CreateGamePage> {
 
   @override
   Widget build(BuildContext context) {
-    ViewModel.gameController = null;
     List<Widget> listTiles = roles.entries.map((entry) {
       Role role = entry.key;
       int count = entry.value;
