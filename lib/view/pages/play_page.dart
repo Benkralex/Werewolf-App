@@ -37,6 +37,13 @@ class PlayPageState extends State<PlayPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (ViewModel.gameController == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     // Scaffold
     return Scaffold(
       appBar: AppBar(
