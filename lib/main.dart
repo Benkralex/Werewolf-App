@@ -8,14 +8,13 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   await SystemTheme.accentColor.load();
   SystemTheme.fallbackColor = Colors.blue;
-  
+
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
-      path: 'assets/translations',
-      fallbackLocale: Locale('de', 'DE'),
-      child: WerewolfApp()
-    ),
+        supportedLocales: const [Locale('en'), Locale('de')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('de'),
+        child: const WerewolfApp()),
   );
 }
 
@@ -30,9 +29,18 @@ class WerewolfApp extends StatelessWidget {
       locale: context.locale,
       title: 'app_name'.tr(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: SystemTheme.accentColor.accent, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: SystemTheme.accentColor.accent,
+            brightness: Brightness.light),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: SystemTheme.accentColor.accent,
+            brightness: Brightness.dark),
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.system,
       home: const CreateGamePage(),
     );
   }
