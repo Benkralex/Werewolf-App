@@ -22,7 +22,7 @@ class Villager extends Role {
   @override
   bool checkWin(GameController game, Player p) {
     for (Player p2 in game.alivePlayers) {
-      if (p2.role.group != "villager") return false;
+      if (p2.role.group != "villager" && p2.role.group != "gerber") return false;
     }
     return true;
   }

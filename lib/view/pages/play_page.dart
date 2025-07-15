@@ -16,11 +16,15 @@ class PlayPage extends StatefulWidget {
 
 class PlayPageState extends State<PlayPage> {
   @override
-  Widget build(BuildContext context) {
-    if (ViewModel.gameController == null) throw Exception("GameController is null. Please create a game first.");
+  void initState() {
+    super.initState();
+    if (ViewModel.gameController == null) {
+      throw Exception("GameController is null. Please create a game first.");
+    }
 
     // Initialize callbacks for ViewModel
-    ViewModel.selectPlayerCallback = (List<Player> players, String message, Player askingPlayer) async {
+    ViewModel.selectPlayerCallback =
+        (List<Player> players, String message, Player askingPlayer) async {
       return await selectPlayerDialog(context, players, message, askingPlayer);
     };
     ViewModel.showMessageCallback = (String message) async {
@@ -29,7 +33,17 @@ class PlayPageState extends State<PlayPage> {
     ViewModel.askCallback = (String msg, List<String> options) async {
       return await askDialog(context, msg, options);
     };
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    if (ViewModel.gameController == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     // Scaffold
     return Scaffold(
       appBar: AppBar(
@@ -53,29 +67,32 @@ class PlayPageState extends State<PlayPage> {
       ),
       body: Center(
         child: Text(
-          'gametime.${ViewModel.gameController!.gameState.time.toString()}'.tr(),
+          'gametime.${ViewModel.gameController!.gameState.time.toString()}'
+              .tr(),
           style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async{
+        onPressed: () async {
           bool gameFinished = ViewModel.gameController!.gameState.gameFinished;
           if (!gameFinished) {
-            await ViewModel.gameController!.next();            
+            await ViewModel.gameController!.next();
             setState(() {});
           } else {
             showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('dialog_title.game_finished').tr(),
+                  title: const Text('dialog_title.game_finished').tr(),
                   content: Text('win_msg'.tr(namedArgs: {
-                    'winner': 'role.${ViewModel.gameController!.gameState.winningGroups.join(", ")}'.tr(),
+                    'winner':
+                        'role.${ViewModel.gameController!.gameState.winningGroups.join(", ")}'
+                            .tr(),
                   })),
                   actions: <Widget>[
                     TextButton(
-                      child: Text('option.new_game').tr(),
+                      child: const Text('option.new_game').tr(),
                       onPressed: () async {
                         await Navigator.of(context).pushNamedAndRemoveUntil(
                           '/',
@@ -90,8 +107,8 @@ class PlayPageState extends State<PlayPage> {
           }
         },
         tooltip: 'option.next'.tr(),
-        icon: const Text('option.next').tr(),
-        label: const Icon(Icons.arrow_forward),
+        icon: const Icon(Icons.arrow_forward),
+        label: const Text('option.next').tr(),
       ),
     );
   }
