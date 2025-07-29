@@ -37,7 +37,7 @@ class Mage extends Role {
       String action = await game.ask(p2.name, options);
       if (action == "option.kill") {
         game.killPlayer(
-          await game.selectPlayer(game.players, "selection.select_player_kill", p),
+          await game.selectPlayer(game.alivePlayers, "selection.select_player_kill", p),
           p,
           GameTime.sunset,
         );

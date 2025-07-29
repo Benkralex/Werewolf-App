@@ -47,8 +47,11 @@ class GameController {
   }
 
   Future<void> update() async {
+    checkForWins();
     await unalivePlayers();
+    checkForWins();
     updatePlayerProtection();
+    checkForWins();
     await lynchPlayer();
     checkForWins();
   }
@@ -98,7 +101,7 @@ class GameController {
     p.isAlive = false;
     await p.role.onDeath(this, p);
     if (p.isAlive) return;
-    showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}));
+    await showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}));
     for (Player p in p.killsOnDeath) {
       if (!p.isAlive) continue;
       killPlayerNow(p);
@@ -123,8 +126,8 @@ class GameController {
     return ViewModel.selectPlayer(players, message, askingPlayer);
   }
 
-  void showMessage(String msg) {
-    ViewModel.showMessage(msg);
+  Future<void> showMessage(String msg) async {
+    await ViewModel.showMessage(msg);
   }
 
   Future<String> ask(String msg, List<String> options) async {
