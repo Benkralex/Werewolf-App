@@ -15,10 +15,7 @@ class CreateGamePage extends StatefulWidget {
 
 
 class CreateGamePageState extends State<CreateGamePage> {
-  Map<Role, int> roles = {
-    ViewModel.roles.firstWhere((role) => role.name == "role.villager"): 5,
-    ViewModel.roles.firstWhere((role) => role.name == "role.werewolf"): 2,
-  };
+  Map<Role, int> roles = {};
 
   @override
   void initState() {

@@ -2,7 +2,7 @@ name: werewolf_app
 description: "This is an app, that should help moderators of the Werewolf game to keep track of the roles, deaths and so on."
 publish_to: 'none'
 
-version: 2.0.0-beta
+version: 2.0.2
 
 environment:
   sdk: ^3.8.1
