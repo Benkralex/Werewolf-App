@@ -70,6 +70,7 @@ class GameController {
   }
 
   Future<void> lynchPlayer() async {
+    if (gameState.gameFinished) return;
     if (gameState.time == GameTime.sunrise) {
       Player p = await selectPlayer(alivePlayers, "selection.select_player_lynch", Player("village".tr(), Villager()));
       p.isAlive = false;
