@@ -7,7 +7,10 @@ import 'package:werewolf_app/model/roles/villager.dart';
 
 class Witch extends Role {
   @override
-  Map<String, dynamic> defaultProperties = {"property.kills": 2, "property.heals": 2};
+  Map<String, dynamic> defaultProperties = {
+    "property.kills": 2,
+    "property.heals": 2,
+  };
 
   @override
   String description = "";
@@ -35,14 +38,22 @@ class Witch extends Role {
       List<String> options = ["option.skip"];
       if (p.properties["property.kills"] > 0) options.add("option.kill");
       if (p.properties["property.heals"] > 0) options.add("option.heal");
-      String action = await game.ask("witch_ask_heal_kill_msg".tr(namedArgs: {'player': p2.name}), options);
+      String action = await game.ask(
+        "witch_ask_heal_kill_msg".tr(namedArgs: {'player': p2.name}),
+        "(${p.name}) ${p.role.name.tr()}",
+        options,
+      );
       if (action == "option.kill") {
         game.killPlayer(
-          await game.selectPlayer(game.alivePlayers, "selection.select_player_kill", p),
+          await game.selectPlayer(
+            game.alivePlayers,
+            "selection.select_player_kill",
+            p,
+          ),
           p,
-          GameTime.sunset,
+          p2.diesAt!,
         );
-        p.properties["property.heal"]--;
+        p.properties["property.kills"]--;
       } else if (action == "option.heal") {
         p2.diesAt = null;
         p2.killedBy = null;

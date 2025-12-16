@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class AskDialog extends StatefulWidget {
   final String msg;
   final List<String> options;
+  final String askedBy;
 
   const AskDialog({
     super.key,
     required this.msg,
+    required this.askedBy,
     required this.options,
   });
 
@@ -21,27 +23,41 @@ class _AskDialogState extends State<AskDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      //title: Text('dialog_title.ask').tr(),
       title: Text(widget.msg),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          //Text(widget.msg),
-          //const SizedBox(height: 10),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: widget.options.map((option) {
-              return RadioListTile<String>(
-                title: Text(option).tr(),
-                value: option,
-                groupValue: result,
-                onChanged: (value) {
-                  setState(() {
-                    result = value;
-                  });
-                },
-              );
-            }).toList(),
+          Text(widget.askedBy),
+          //SizedBox(height: 12.0),
+          RadioGroup(
+            groupValue: result,
+            onChanged: (String? value) {
+              setState(() {
+                result = value;
+              });
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: widget.options.map((option) {
+                return Column(
+                  children: [
+                    ListTile(
+                      title: Text(option).tr(),
+                      leading: Radio<String>(value: option),
+                      onTap: () {
+                        setState(() {
+                          result = option;
+                        });
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    SizedBox(height: 4.0),
+                  ],
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
@@ -60,15 +76,17 @@ class _AskDialogState extends State<AskDialog> {
 Future<String?> askDialog(
   BuildContext context,
   String msg,
+  String askedBy,
   List<String> options,
 ) async {
-  return await showDialog<String>(
-    context: context,
-    builder: (BuildContext context) {
-      return AskDialog(
-        msg: msg,
-        options: options,
-      );
-    },
-  );
+  String? result;
+  while (result == null) {
+    result = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AskDialog(msg: msg, askedBy: askedBy, options: options);
+      },
+    );
+  }
+  return result;
 }

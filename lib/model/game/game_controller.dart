@@ -72,11 +72,19 @@ class GameController {
   Future<void> lynchPlayer() async {
     if (gameState.gameFinished) return;
     if (gameState.time == GameTime.sunrise) {
-      Player p = await selectPlayer(alivePlayers, "selection.select_player_lynch", Player("village".tr(), Villager()));
+      Player p = await selectPlayer(
+        alivePlayers,
+        "selection.select_player_lynch",
+        Player("village".tr(), Villager()),
+      );
       p.isAlive = false;
       p.role.onLynch(this, p);
       if (p.isAlive) return;
-      showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}));
+      showMessage(
+        "player_dies".tr(
+          namedArgs: {"player": p.name, "role": p.role.name.tr()},
+        ),
+      );
       for (Player p2 in p.killsOnDeath) {
         if (!p2.isAlive) continue;
         killPlayerNow(p2);
@@ -102,7 +110,9 @@ class GameController {
     p.isAlive = false;
     await p.role.onDeath(this, p);
     if (p.isAlive) return;
-    await showMessage("player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}));
+    await showMessage(
+      "player_dies".tr(namedArgs: {"player": p.name, "role": p.role.name.tr()}),
+    );
     for (Player p in p.killsOnDeath) {
       if (!p.isAlive) continue;
       killPlayerNow(p);
@@ -112,18 +122,23 @@ class GameController {
   //Actions
   void killPlayer(Player target, Player killer, GameTime diesAt) {
     if (target.diesAt != null) {
-      if (((diesAt.phase - gameState.time.phase+1) % 5) < ((target.diesAt!.phase - gameState.time.phase+1) % 5)) { // neu kommt vor alt
+      if (((diesAt.phase - gameState.time.phase + 1) % 5) <
+          ((target.diesAt!.phase - gameState.time.phase + 1) % 5)) {
+        // neu kommt vor alt
         target.diesAt = diesAt;
         target.killedBy = killer;
       }
-      
     } else {
       target.diesAt = diesAt;
       target.killedBy = killer;
     }
   }
 
-  Future<Player> selectPlayer(List<Player> players, String message, Player askingPlayer) async {
+  Future<Player> selectPlayer(
+    List<Player> players,
+    String message,
+    Player askingPlayer,
+  ) async {
     return ViewModel.selectPlayer(players, message, askingPlayer);
   }
 
@@ -131,8 +146,8 @@ class GameController {
     await ViewModel.showMessage(msg);
   }
 
-  Future<String> ask(String msg, List<String> options) async {
-    return await ViewModel.ask(msg, options);
+  Future<String> ask(String msg, String askedBy, List<String> options) async {
+    return await ViewModel.ask(msg, askedBy, options);
   }
 
   @override

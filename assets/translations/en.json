@@ -7,7 +7,7 @@
     "player_overview": "Player Overview",
     "edit_player": "Edit Player",
     "player_name": "Player Name",
-    "show_role_message": "The player \"{name}\" has the role \"{role}\"",
+    "show_role_message": "{name} has the role {role}",
     "note": {
         "one": "Note",
         "two": "Notes",
@@ -49,7 +49,8 @@
     },
     "error": {
         "min_player_count_must_be_reached": "At least 5 players must be selected to start a game.",
-        "armor_same_player_selected": "Just no..."
+        "armor_same_player_selected": "Just no...",
+        "every_player_must_have_a_name": "Every player must have a name. ({count} of {neededCount})"
     },
     "role": {
         "armor": "Armor",
@@ -80,6 +81,8 @@
         "afterWerewolfs": "After Werewolves"
     },
     "win_msg": "The game is finished. {winner} has won!",
-    "player_dies": "The player \"{player}\" dies. Their role was \"{role}\".",
-    "witch_ask_heal_kill_msg": "Do you want to kill or heal {player}?"
+    "player_dies": "{role} ({player}) dies.",
+    "witch_ask_heal_kill_msg": "Kill or heal {player}?",
+    "no_names": "No names added.",
+    "enter_player_name": "Enter player name"
 }

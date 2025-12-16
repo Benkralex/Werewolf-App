@@ -46,21 +46,30 @@ class ViewModel {
   static Color iconButtonActiveColor(BuildContext context) {
     return Theme.of(context).colorScheme.primary;
   }
+
   static Color iconButtonInactiveColor(BuildContext context) {
-    return Theme.of(context).colorScheme.primary.withValues(
-      alpha: 0.6,
-    );
+    return Theme.of(context).colorScheme.primary.withValues(alpha: 0.6);
   }
+
   static Color primaryColor(BuildContext context) {
     return Theme.of(context).colorScheme.primary;
   }
+
   static Color secondaryColor(BuildContext context) {
     return Theme.of(context).colorScheme.secondary;
   }
 
+  static Color textColor(BuildContext context) {
+    return Theme.of(context).colorScheme.onSurface;
+  }
+
   // Callbacks
   static Function? selectPlayerCallback;
-  static Future<Player> selectPlayer(List<Player> players, String message, Player askingPlayer) async {
+  static Future<Player> selectPlayer(
+    List<Player> players,
+    String message,
+    Player askingPlayer,
+  ) async {
     return await selectPlayerCallback?.call(players, message, askingPlayer);
   }
 
@@ -70,7 +79,13 @@ class ViewModel {
   }
 
   static Function? askCallback;
-  static Future<String> ask(String msg, List<String> options) async {
-    return await askCallback?.call(msg, options);
+  static Future<String> ask(
+    String msg,
+    String askedBy,
+    List<String> options,
+  ) async {
+    return await askCallback?.call(msg, askedBy, options);
   }
+
+  static List<String> playerNames = [];
 }

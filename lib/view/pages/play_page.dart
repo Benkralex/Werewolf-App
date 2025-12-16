@@ -25,24 +25,26 @@ class PlayPageState extends State<PlayPage> {
     // Initialize callbacks for ViewModel
     ViewModel.selectPlayerCallback =
         (List<Player> players, String message, Player askingPlayer) async {
-      return await selectPlayerDialog(context, players, message, askingPlayer);
-    };
+          return await selectPlayerDialog(
+            context,
+            players,
+            message,
+            askingPlayer,
+          );
+        };
     ViewModel.showMessageCallback = (String message) async {
       return await msgDialog(context, message);
     };
-    ViewModel.askCallback = (String msg, List<String> options) async {
-      return await askDialog(context, msg, options);
-    };
+    ViewModel.askCallback =
+        (String msg, String askedBy, List<String> options) async {
+          return await askDialog(context, msg, askedBy, options);
+        };
   }
 
   @override
   Widget build(BuildContext context) {
     if (ViewModel.gameController == null) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     // Scaffold
     return Scaffold(
@@ -85,11 +87,15 @@ class PlayPageState extends State<PlayPage> {
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text('dialog_title.game_finished').tr(),
-                  content: Text('win_msg'.tr(namedArgs: {
-                    'winner':
-                        'role.${ViewModel.gameController!.gameState.winningGroups.join(", ")}'
-                            .tr(),
-                  })),
+                  content: Text(
+                    'win_msg'.tr(
+                      namedArgs: {
+                        'winner':
+                            'role.${ViewModel.gameController!.gameState.winningGroups.join(", ")}'
+                                .tr(),
+                      },
+                    ),
+                  ),
                   actions: <Widget>[
                     TextButton(
                       child: const Text('option.new_game').tr(),

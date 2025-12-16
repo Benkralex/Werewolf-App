@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/view/pages/play_page.dart';
+import 'package:werewolf_app/view/pages/init_names_page.dart';
 import 'package:werewolf_app/viewmodel/main.dart';
 
 class CreateGamePage extends StatefulWidget {
@@ -13,22 +13,22 @@ class CreateGamePage extends StatefulWidget {
   State<CreateGamePage> createState() => CreateGamePageState();
 }
 
-
 class CreateGamePageState extends State<CreateGamePage> {
   Map<Role, int> roles = {};
 
   @override
   void initState() {
     super.initState();
-    if (ViewModel.gameController?.gameState?.gameFinished == true) {
+    if (ViewModel.gameController?.gameState.gameFinished == true) {
       List<Player> players = ViewModel.gameController?.players ?? [];
+      ViewModel.playerNames = players.map((p) => p.name).toList();
       ViewModel.gameController = null;
       for (Player p in players) {
         Role role = p.role;
-        if (this.roles[role] != null) {
-          this.roles[role] = this.roles[role]! + 1;
+        if (roles[role] != null) {
+          roles[role] = roles[role]! + 1;
         } else {
-          this.roles[role] = 1;
+          roles[role] = 1;
         }
       }
     } else {
@@ -129,7 +129,9 @@ class CreateGamePageState extends State<CreateGamePage> {
                     });
                   },
                   icon: const Icon(Icons.add),
-                  color: (count < role.maxPlayers) ? ViewModel.iconButtonActiveColor(context) : ViewModel.iconButtonInactiveColor(context),
+                  color: (count < role.maxPlayers)
+                      ? ViewModel.iconButtonActiveColor(context)
+                      : ViewModel.iconButtonInactiveColor(context),
                 ),
               ],
             ),
@@ -139,13 +141,8 @@ class CreateGamePageState extends State<CreateGamePage> {
     }).toList();
 
     if (listTiles.isNotEmpty) {
-      listTiles.add(
-        const Padding(
-          padding: EdgeInsets.only(bottom: 64.0),
-        ),
-      );
+      listTiles.add(const Padding(padding: EdgeInsets.only(bottom: 64.0)));
     }
-
 
     return Scaffold(
       appBar: AppBar(
@@ -179,7 +176,9 @@ class CreateGamePageState extends State<CreateGamePage> {
           List<Player> players = [];
           roles.forEach((role, c) {
             for (int i = 0; i < c; i++) {
-              players.add(Player("${'player'.tr()} ${players.length + 1}", role));
+              players.add(
+                Player("${'player'.tr()} ${players.length + 1}", role),
+              );
             }
           });
           ViewModel.gameController = GameController(players);
@@ -187,13 +186,13 @@ class CreateGamePageState extends State<CreateGamePage> {
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation1, animation2) =>
-                  const PlayPage(),
+                  const InitNamesPage(),
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero,
             ),
           );
         },
-        tooltip: 'create_game'.tr(),
+        tooltip: 'option.next'.tr(),
         child: const Icon(Icons.arrow_forward),
       ),
     );

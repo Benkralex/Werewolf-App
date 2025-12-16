@@ -7,7 +7,7 @@
     "player_overview": "Spielerübersicht",
     "edit_player": "Spieler bearbeiten",
     "player_name": "Spielername",
-    "show_role_message": "Der Spieler \"{name}\" hat die Rolle \"{role}\"",
+    "show_role_message": "{name} hat die Rolle {role}",
     "note": {
         "one": "Notiz",
         "two": "Notizen",
@@ -49,7 +49,8 @@
     },
     "error": {
         "min_player_count_must_be_reached": "Es müssen mindestens 5 Spieler ausgewählt werden, um ein Spiel zu starten.",
-        "armor_same_player_selected": "Einfach nein..."
+        "armor_same_player_selected": "Einfach nein...",
+        "every_player_must_have_a_name": "Jeder Spieler muss einen Namen haben. ({count} von {neededCount})"
     },
     "role": {
         "armor": "Armor",
@@ -80,6 +81,8 @@
         "afterWerewolfs": "Nach den Werwölfen"
     },
     "win_msg": "Das Spiel ist beendet. {winner} hat gewonnen!",
-    "player_dies": "Der Spieler \"{player}\" stirbt. Seine Rolle war \"{role}\".",
-    "witch_ask_heal_kill_msg": "Möchtest du {player} heilen oder töten?"
+    "player_dies": "{role} ({player}) stirbt.",
+    "witch_ask_heal_kill_msg": "{player} heilen oder töten?",
+    "no_names": "Keine Namen hinzugefügt.",
+    "enter_player_name": "Spielernamen eingeben"
 }
