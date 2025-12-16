@@ -21,12 +21,13 @@ class _AskDialogState extends State<AskDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('dialog_title.ask').tr(),
+      //title: Text('dialog_title.ask').tr(),
+      title: Text(widget.msg),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.msg),
-          const SizedBox(height: 10),
+          //Text(widget.msg),
+          //const SizedBox(height: 10),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: widget.options.map((option) {

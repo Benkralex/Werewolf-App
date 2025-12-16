@@ -80,5 +80,6 @@
         "afterWerewolfs": "After Werewolves"
     },
     "win_msg": "The game is finished. {winner} has won!",
-    "player_dies": "The player \"{player}\" dies. Their role was \"{role}\"."
+    "player_dies": "The player \"{player}\" dies. Their role was \"{role}\".",
+    "witch_ask_heal_kill_msg": "Do you want to kill or heal {player}?"
 }

@@ -20,7 +20,20 @@ class CreateGamePageState extends State<CreateGamePage> {
   @override
   void initState() {
     super.initState();
-    ViewModel.gameController = null;
+    if (ViewModel.gameController?.gameState?.gameFinished == true) {
+      List<Player> players = ViewModel.gameController?.players ?? [];
+      ViewModel.gameController = null;
+      for (Player p in players) {
+        Role role = p.role;
+        if (this.roles[role] != null) {
+          this.roles[role] = this.roles[role]! + 1;
+        } else {
+          this.roles[role] = 1;
+        }
+      }
+    } else {
+      ViewModel.gameController = null;
+    }
   }
 
   void _showRoleSelectionSheet() async {

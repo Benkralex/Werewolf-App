@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/game/game_time.dart';
 import 'package:werewolf_app/model/player/player.dart';
@@ -34,7 +35,7 @@ class Mage extends Role {
       List<String> options = ["option.skip"];
       if (p.properties["property.kills"] > 0) options.add("option.kill");
       if (p.properties["property.heals"] > 0) options.add("option.heal");
-      String action = await game.ask(p2.name, options);
+      String action = await game.ask("witch_ask_heal_kill_msg".tr(namedArgs: {'player': p2.name}), options);
       if (action == "option.kill") {
         game.killPlayer(
           await game.selectPlayer(game.alivePlayers, "selection.select_player_kill", p),
