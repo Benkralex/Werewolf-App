@@ -35,7 +35,8 @@
         "kills": "Todestränke",
         "heals": "Heiltränke",
         "wakesUpEveryXNight": "Wird jede X.Nacht aufgeweckt",
-        "leftWakeUps": "Anzahl der verbleibenden Weckrufe"
+        "leftWakeUps": "Anzahl der verbleibenden Weckrufe",
+        "diesNextSunrises": "Stirbt nächten Morgen (1=Ja, 0=Nein)"
     },
     "option": {
         "kill": "Töten",
@@ -66,6 +67,7 @@
         "prince": "Prinz",
         "seer": "Seher",
         "seerin": "Seherin",
+        "tough_guy": "Harter Bursche",
         "vampire": "Vampir",
         "villager": "Dorfbewohner",
         "werewolf": "Werwolf",

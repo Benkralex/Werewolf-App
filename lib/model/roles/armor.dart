@@ -31,6 +31,11 @@ class Armor extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
+    if (game.gameState.nightCount %
+            p.properties["property.wakesUpEveryXNight"] !=
+        0) {
+      return; //If its not the right night, skip
+    }
     if (p.properties["property.leftWakeUps"] != -1) {
       //If its not infinite...
       if (p.properties["property.leftWakeUps"] > 0) {
@@ -39,8 +44,16 @@ class Armor extends Role {
         return; //...skip
       }
     }
-    Player target1 = await game.selectPlayer(game.alivePlayers, "selection.first_fall_in_love", p);
-    Player target2 = await game.selectPlayer(game.alivePlayers, "selection.second_fall_in_love", p);
+    Player target1 = await game.selectPlayer(
+      game.alivePlayers,
+      "selection.first_fall_in_love",
+      p,
+    );
+    Player target2 = await game.selectPlayer(
+      game.alivePlayers,
+      "selection.second_fall_in_love",
+      p,
+    );
     if (target1 == target2) {
       game.showMessage("error.armor_same_player_selected".tr());
       return;

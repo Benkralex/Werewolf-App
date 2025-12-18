@@ -35,7 +35,8 @@
         "kills": "Death Potions",
         "heals": "Healing Potions",
         "wakesUpEveryXNight": "Wakes up every X night",
-        "leftWakeUps": "Number of remaining wake-ups"
+        "leftWakeUps": "Number of remaining wake-ups",
+        "diesNextSunrises": "Dies next sunrise (1=Yes, 0=No)"
     },
     "option": {
         "kill": "Kill",
@@ -66,6 +67,7 @@
         "prince": "Prince",
         "seer": "Seer",
         "seerin": "Seer (female)",
+        "tough_guy": "Tough Guy",
         "vampire": "Vampire",
         "villager": "Villager",
         "werewolf": "Werewolf",

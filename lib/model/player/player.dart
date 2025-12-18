@@ -48,20 +48,21 @@ class Player {
     if (isProtected) {
       return true;
     }
-    if (gameTime.isNight) {
+    if (gameTime.isNight || killedBy?.role.nightActionTime.isNight == true) {
       return isProtectedAtNight;
     }
-    if (gameTime.isDay) {
+    if (gameTime.isDay || killedBy?.role.nightActionTime.isDay == true) {
       return isProtectedAtDay;
     }
     return false;
   }
 
   void updateProtection(GameTime gameTime) {
-    if (protectedUntil == gameTime) return;
-    protectedUntil = null;
-    protectedBy = null;
-    isProtected = false;
+    if (protectedUntil == gameTime) {
+      protectedUntil = null;
+      protectedBy = null;
+      isProtected = false;
+    }
   }
 
   @override

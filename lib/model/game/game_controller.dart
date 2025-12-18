@@ -50,9 +50,9 @@ class GameController {
     checkForWins();
     await unalivePlayers();
     checkForWins();
-    updatePlayerProtection();
-    checkForWins();
     await lynchPlayer();
+    checkForWins();
+    updatePlayerProtection();
     checkForWins();
   }
 
@@ -101,7 +101,7 @@ class GameController {
   Future<void> unalivePlayers() async {
     for (Player p in alivePlayers) {
       if (p.diesAt == gameState.time) {
-        await killPlayerNow(p);
+        if (!p.isNowProtected(gameState.time)) await killPlayerNow(p);
       }
     }
   }

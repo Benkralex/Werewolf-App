@@ -21,7 +21,11 @@ class CreateGamePageState extends State<CreateGamePage> {
     super.initState();
     if (ViewModel.gameController?.gameState.gameFinished == true) {
       List<Player> players = ViewModel.gameController?.players ?? [];
-      ViewModel.playerNames = players.map((p) => p.name).toList();
+      ViewModel.playerNames = players
+          .map((p) => p.name)
+          .toList()
+          .where((name) => !name.startsWith('player'.tr()))
+          .toList();
       ViewModel.gameController = null;
       for (Player p in players) {
         Role role = p.role;

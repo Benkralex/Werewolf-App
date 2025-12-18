@@ -15,6 +15,7 @@ import 'package:werewolf_app/model/roles/priest.dart';
 import 'package:werewolf_app/model/roles/prince.dart';
 import 'package:werewolf_app/model/roles/seer.dart';
 import 'package:werewolf_app/model/roles/seerin.dart';
+import 'package:werewolf_app/model/roles/tough_guy.dart';
 import 'package:werewolf_app/model/roles/vampire.dart';
 import 'package:werewolf_app/model/roles/villager.dart';
 import 'package:werewolf_app/model/roles/werewolf.dart';
@@ -36,6 +37,7 @@ class ViewModel {
     Prince(),
     Seer(),
     Seerin(),
+    ToughGuy(),
     Vampire(),
     Villager(),
     Werewolf(),
