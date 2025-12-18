@@ -37,7 +37,7 @@
         "wakesUpEveryXNight": "Wird jede X.Nacht aufgeweckt",
         "leftWakeUps": "Anzahl der verbleibenden Weckrufe",
         "diesNextSunrises": "Stirbt nächten Morgen (1=Ja, 0=Nein)",
-        "next_night_two_victims": "Nächsten Nacht zwei Opfer"
+        "next_night_victim_count": "Anzahl an Opfern nächsten Nacht"
     },
     "option": {
         "kill": "Töten",
@@ -63,6 +63,7 @@
         "ghost": "Geist",
         "hunter": "Jäger",
         "idiot": "Idiot",
+        "lepers": "Aussätzige",
         "lykanthropin": "Lykanthropin",
         "mage": "Magier",
         "pacifist": "Pazifist",

@@ -37,7 +37,7 @@
         "wakesUpEveryXNight": "Wakes up every X night",
         "leftWakeUps": "Number of remaining wake-ups",
         "diesNextSunrises": "Dies next sunrise (1=Yes, 0=No)",
-        "next_night_two_victims": "Next night two victims"
+        "next_night_victim_count": "Next night victim count"
     },
     "option": {
         "kill": "Kill",
@@ -63,6 +63,7 @@
         "ghost": "Ghost",
         "hunter": "Hunter",
         "idiot": "Idiot",
+        "lepers": "Lepers",
         "lykanthropin": "Lycanthrope",
         "mage": "Mage",
         "pacifist": "Pacifist",

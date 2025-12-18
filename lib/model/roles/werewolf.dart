@@ -6,7 +6,7 @@ import 'package:werewolf_app/model/player/role.dart';
 class Werewolf extends Role {
   @override
   Map<String, dynamic> defaultProperties = {
-    "property.next_night_two_victims": 0,
+    "property.next_night_victim_count": 1,
   };
 
   @override
@@ -39,16 +39,29 @@ class Werewolf extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    if (game.players
-        .where((p) => p.properties["property.next_night_two_victims"] == 1)
-        .isNotEmpty) {
-      game.players
-          .where((p) => p.properties["property.next_night_two_victims"] == 1)
-          .forEach((p2) {
-            p2.properties["property.next_night_two_victims"] = 0;
-          });
-      await onNightAction(game, p);
+    for (
+      int i = 0;
+      i < (p.properties["property.next_night_victim_count"] ?? 1);
+      i++
+    ) {
+      await killAPlayer(game, p);
     }
+    editPropertyForEveryWerewolf(game, "property.next_night_victim_count", 1);
+  }
+
+  void editPropertyForEveryWerewolf(
+    GameController game,
+    String property,
+    dynamic value,
+  ) {
+    for (Player p2 in game.players) {
+      if (p2.role.name == "role.werewolf") {
+        p2.properties[property] = value;
+      }
+    }
+  }
+
+  Future<void> killAPlayer(GameController game, Player p) async {
     game.killPlayer(
       await game.selectPlayer(
         game.alivePlayers.where((p) => p.role.group != "werewolf").toList(),

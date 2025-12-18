@@ -4,7 +4,7 @@ import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
 import 'package:werewolf_app/model/roles/werewolf.dart';
 
-class WerewolfKid extends Role {
+class Lepers extends Role {
   @override
   Map<String, dynamic> defaultProperties = {};
 
@@ -12,10 +12,10 @@ class WerewolfKid extends Role {
   String description = "";
 
   @override
-  String name = "role.werewolf_kid";
+  String name = "role.lepers";
 
   @override
-  String group = "werewolf";
+  String group = "villager";
 
   @override
   GameTime nightActionTime = GameTime.sunrise;
@@ -27,11 +27,13 @@ class WerewolfKid extends Role {
 
   @override
   Future<void> onDeath(GameController game, Player p) async {
-    Werewolf().editPropertyForEveryWerewolf(
-      game,
-      "property.next_night_victim_count",
-      2,
-    );
+    if (p.killedBy?.role.name == "role.werewolf") {
+      Werewolf().editPropertyForEveryWerewolf(
+        game,
+        "property.next_night_victim_count",
+        0,
+      );
+    }
   }
 
   @override

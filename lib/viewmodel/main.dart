@@ -10,6 +10,7 @@ import 'package:werewolf_app/model/roles/gerber.dart';
 import 'package:werewolf_app/model/roles/ghost.dart';
 import 'package:werewolf_app/model/roles/hunter.dart';
 import 'package:werewolf_app/model/roles/idiot.dart';
+import 'package:werewolf_app/model/roles/lepers.dart';
 import 'package:werewolf_app/model/roles/lykanthropin.dart';
 import 'package:werewolf_app/model/roles/mage.dart';
 import 'package:werewolf_app/model/roles/pacifist.dart';
@@ -35,6 +36,7 @@ class ViewModel {
     Ghost(),
     Hunter(),
     Idiot(),
+    Lepers(),
     Lykanthropin(),
     Mage(),
     Pacifist(),

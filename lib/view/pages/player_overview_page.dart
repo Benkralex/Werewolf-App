@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werewolf_app/model/player/player.dart';
+import 'package:werewolf_app/model/roles/werewolf.dart';
 import 'package:werewolf_app/viewmodel/main.dart';
 
 class PlayerOverviewPage extends StatefulWidget {
@@ -123,6 +124,16 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
             TextButton(
               onPressed: () {
                 setState(() {
+                  if (p.role.name == "role.werewolf") {
+                    for (String key in changedProperties.keys) {
+                      Werewolf().editPropertyForEveryWerewolf(
+                        ViewModel.gameController!,
+                        key,
+                        changedProperties[key],
+                      );
+                    }
+                    return;
+                  }
                   p.properties = changedProperties;
                 });
                 Navigator.of(context).pop();
