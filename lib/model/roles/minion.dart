@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/game/game_time.dart';
 import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
 import 'package:werewolf_app/model/roles/werewolf.dart';
 
-class WerewolfKid extends Role {
+class Minion extends Role {
   @override
   Map<String, dynamic> defaultProperties = {};
 
@@ -12,7 +13,7 @@ class WerewolfKid extends Role {
   String description = "";
 
   @override
-  String name = "role.werewolf_kid";
+  String name = "role.minion";
 
   @override
   String group = "werewolf";
@@ -27,29 +28,10 @@ class WerewolfKid extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    if (game.alivePlayers
-        .where(
-          (p2) =>
-              p2.role.name == "role.werewolf" ||
-              p2.role.name == "role.lonely_wolf",
-        )
-        .isEmpty) {
-      Werewolf().onNightAction(game, p);
-    }
-  }
-
-  @override
-  Future<void> onDeath(GameController game, Player p) async {
-    Werewolf().editPropertyForEveryWerewolf(
-      game,
-      "property.next_night_victim_count",
-      2,
+    if (game.gameState.nightCount != 0) return;
+    await game.showMessage(
+      "minion_will_wake_up".tr(namedArgs: {"player": p.name}),
     );
-  }
-
-  @override
-  Future<void> onLynch(GameController game, Player p) async {
-    await onDeath(game, p);
   }
 
   @override

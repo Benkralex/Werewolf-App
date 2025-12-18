@@ -11,8 +11,11 @@ import 'package:werewolf_app/model/roles/ghost.dart';
 import 'package:werewolf_app/model/roles/hunter.dart';
 import 'package:werewolf_app/model/roles/idiot.dart';
 import 'package:werewolf_app/model/roles/lepers.dart';
+import 'package:werewolf_app/model/roles/lonely_wolf.dart';
 import 'package:werewolf_app/model/roles/lykanthropin.dart';
 import 'package:werewolf_app/model/roles/mage.dart';
+import 'package:werewolf_app/model/roles/mayor.dart';
+import 'package:werewolf_app/model/roles/minion.dart';
 import 'package:werewolf_app/model/roles/pacifist.dart';
 import 'package:werewolf_app/model/roles/priest.dart';
 import 'package:werewolf_app/model/roles/prince.dart';
@@ -37,8 +40,11 @@ class ViewModel {
     Hunter(),
     Idiot(),
     Lepers(),
+    LonelyWolf(),
     Lykanthropin(),
     Mage(),
+    Mayor(),
+    Minion(),
     Pacifist(),
     Priest(),
     Prince(),

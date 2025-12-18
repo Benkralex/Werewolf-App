@@ -64,7 +64,12 @@ class Werewolf extends Role {
   Future<void> killAPlayer(GameController game, Player p) async {
     game.killPlayer(
       await game.selectPlayer(
-        game.alivePlayers.where((p) => p.role.group != "werewolf").toList(),
+        game.alivePlayers
+            .where(
+              (p) =>
+                  p.role.group != "werewolf" && p.role.group != "lonely_wolf",
+            )
+            .toList(),
         "selection.select_player_kill",
         p,
       ),

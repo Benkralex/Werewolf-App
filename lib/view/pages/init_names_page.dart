@@ -94,7 +94,7 @@ class InitNamesPageState extends State<InitNamesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('create_game').tr(),
+        title: const Text('choose_names').tr(),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -113,8 +113,25 @@ class InitNamesPageState extends State<InitNamesPage> {
       body: listTiles.isEmpty
           ? Center(child: Text('no_names').tr())
           : ListView(children: listTiles),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: (names.isEmpty)
+            ? Text('option.skip').tr()
+            : (names.length != (ViewModel.gameController?.players.length ?? 0))
+            ? Text('continue_with_names').tr(
+                namedArgs: {
+                  "count": names.length.toString(),
+                  "maxCount":
+                      ViewModel.gameController?.players.length.toString() ??
+                      'error',
+                },
+              )
+            : Text('option.next').tr(),
         onPressed: () {
+          if (!(names.isEmpty ||
+              names.length ==
+                  (ViewModel.gameController?.players.length ?? 0))) {
+            return;
+          }
           if (names.isNotEmpty) {
             if (names.length != ViewModel.gameController?.players.length) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -157,7 +174,7 @@ class InitNamesPageState extends State<InitNamesPage> {
           );
         },
         tooltip: 'create_game'.tr(),
-        child: const Icon(Icons.arrow_forward),
+        icon: const Icon(Icons.arrow_forward),
       ),
     );
   }

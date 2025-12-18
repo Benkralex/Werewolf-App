@@ -90,9 +90,12 @@ class PlayPageState extends State<PlayPage> {
                   content: Text(
                     'win_msg'.tr(
                       namedArgs: {
-                        'winner':
-                            'role.${ViewModel.gameController!.gameState.winningGroups.join(", ")}'
-                                .tr(),
+                        'winner': ViewModel
+                            .gameController!
+                            .gameState
+                            .winningGroups
+                            .map((group) => "role.$group".tr())
+                            .join(", "),
                       },
                     ),
                   ),

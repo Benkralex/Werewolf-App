@@ -1,7 +1,8 @@
 {
     "app_name": "Werwolf",
     "player": "Spieler",
-    "create_game": "Spiel erstellen",
+    "choose_roles": "Rollen auswählen",
+    "choose_names": "Namen auswählen",
     "no_roles": "Keine Rollen ausgewählt",
     "overview": "Übersicht",
     "player_overview": "Spielerübersicht",
@@ -50,9 +51,7 @@
         "new_game": "Neues Spiel"
     },
     "error": {
-        "min_player_count_must_be_reached": "Es müssen mindestens 5 Spieler ausgewählt werden, um ein Spiel zu starten.",
-        "armor_same_player_selected": "Einfach nein...",
-        "every_player_must_have_a_name": "Jeder Spieler muss einen Namen haben. ({count} von {neededCount})"
+        "armor_same_player_selected": "Einfach nein..."
     },
     "role": {
         "armor": "Armor",
@@ -64,8 +63,11 @@
         "hunter": "Jäger",
         "idiot": "Idiot",
         "lepers": "Aussätzige",
+        "lonely_wolf": "Einsamer Wolf",
         "lykanthropin": "Lykanthropin",
         "mage": "Magier",
+        "mayor": "Bürgermeister",
+        "minion": "Günstling",
         "pacifist": "Pazifist",
         "priest": "Priester",
         "prince": "Prinz",
@@ -92,5 +94,9 @@
     "witch_ask_heal_kill_msg": "{player} heilen oder töten?",
     "no_names": "Keine Namen hinzugefügt.",
     "enter_player_name": "Spielernamen eingeben",
-    "changed_role": "{player} (zuvor {oldRole}) ist jetzt {newRole}."
+    "changed_role": "{player} (zuvor {oldRole}) ist jetzt {newRole}.",
+    "minion_will_wake_up": "(Info) {player} (Günstling) wird diese Nacht mit den Werwölfen aufwachen.",
+    "continue_with_count": "Mit {count} Rollen fortfahren",
+    "too_less_roles": "Wähle min. 5 Rollen",
+    "continue_with_names": "{count}/{maxCount} Namen"
 }

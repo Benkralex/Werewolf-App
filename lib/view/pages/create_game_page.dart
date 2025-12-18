@@ -150,7 +150,7 @@ class CreateGamePageState extends State<CreateGamePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('create_game').tr(),
+        title: const Text('choose_roles').tr(),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -163,18 +163,19 @@ class CreateGamePageState extends State<CreateGamePage> {
       body: listTiles.isEmpty
           ? Center(child: Text('no_roles').tr())
           : ListView(children: listTiles),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: (roles.values.fold<int>(0, (a, b) => a + b) >= 5)
+            ? Text('continue_with_count').tr(
+                namedArgs: {
+                  "count": roles.values
+                      .fold<int>(0, (a, b) => a + b)
+                      .toString(),
+                },
+              )
+            : Text('too_less_roles').tr(),
         onPressed: () {
-          int count = 0;
-          roles.forEach((role, c) {
-            count += c;
-          });
+          int count = roles.values.fold<int>(0, (a, b) => a + b);
           if (count < 5) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('error.min_player_count_must_be_reached').tr(),
-              ),
-            );
             return;
           }
           List<Player> players = [];
@@ -197,7 +198,7 @@ class CreateGamePageState extends State<CreateGamePage> {
           );
         },
         tooltip: 'option.next'.tr(),
-        child: const Icon(Icons.arrow_forward),
+        icon: const Icon(Icons.arrow_forward),
       ),
     );
   }

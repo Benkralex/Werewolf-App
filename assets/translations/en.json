@@ -1,7 +1,8 @@
 {
     "app_name": "Werewolf",
     "player": "Player",
-    "create_game": "Create Game",
+    "choose_roles": "Choose Roles",
+    "choose_names": "Choose Names",
     "no_roles": "No roles selected",
     "overview": "Overview",
     "player_overview": "Player Overview",
@@ -64,8 +65,11 @@
         "hunter": "Hunter",
         "idiot": "Idiot",
         "lepers": "Lepers",
+        "lonely_wolf": "Lonely Werewolf",
         "lykanthropin": "Lycanthrope",
         "mage": "Mage",
+        "mayor": "Mayor",
+        "minion": "Minion",
         "pacifist": "Pacifist",
         "priest": "Priest",
         "prince": "Prince",
@@ -92,5 +96,9 @@
     "witch_ask_heal_kill_msg": "Kill or heal {player}?",
     "no_names": "No names added.",
     "enter_player_name": "Enter player name",
-    "changed_role": "{player} (previously {oldRole}) is now {newRole}."
+    "changed_role": "{player} (previously {oldRole}) is now {newRole}.",
+    "minion_will_wake_up": "(info) {player} (Minion) will wake up with the werewolves tonight.",
+    "continue_with_count": "Continue with {count} roles",
+    "too_less_roles": "Choose at least 5 roles",
+    "continue_with_names": "{count}/{maxCount} names"
 }
