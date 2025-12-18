@@ -41,7 +41,7 @@
         "next_night_victim_count": "Next night victim count"
     },
     "option": {
-        "kill": "Kill",
+        "kill": "Kill someone",
         "heal": "Heal",
         "skip": "Skip",
         "save": "Save",

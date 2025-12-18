@@ -41,7 +41,7 @@
         "next_night_victim_count": "Anzahl an Opfern nächsten Nacht"
     },
     "option": {
-        "kill": "Töten",
+        "kill": "Weiteren Töten",
         "heal": "Heilen",
         "skip": "Überspringen",
         "save": "Speichern",
@@ -56,7 +56,7 @@
     "role": {
         "armor": "Armor",
         "blink_girl": "Blinzelmädchen",
-        "bodyguard": "Bodyguard",
+        "bodyguard": "Leibwächter",
         "cursed": "Verfluchter",
         "gerber": "Gerber",
         "ghost": "Geist",
@@ -69,7 +69,7 @@
         "mayor": "Bürgermeister",
         "minion": "Günstling",
         "old_man": "Alter Mann",
-        "pacifist": "Pazifist",
+        "pacifist": "Pazifistin",
         "priest": "Priester",
         "prince": "Prinz",
         "seer": "Seher",
