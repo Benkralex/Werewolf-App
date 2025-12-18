@@ -36,7 +36,8 @@
         "heals": "Heiltränke",
         "wakesUpEveryXNight": "Wird jede X.Nacht aufgeweckt",
         "leftWakeUps": "Anzahl der verbleibenden Weckrufe",
-        "diesNextSunrises": "Stirbt nächten Morgen (1=Ja, 0=Nein)"
+        "diesNextSunrises": "Stirbt nächten Morgen (1=Ja, 0=Nein)",
+        "next_night_two_victims": "Nächsten Nacht zwei Opfer"
     },
     "option": {
         "kill": "Töten",
@@ -57,7 +58,9 @@
         "armor": "Armor",
         "blink_girl": "Blinzelmädchen",
         "bodyguard": "Bodyguard",
+        "cursed": "Verfluchter",
         "gerber": "Gerber",
+        "ghost": "Geist",
         "hunter": "Jäger",
         "idiot": "Idiot",
         "lykanthropin": "Lykanthropin",
@@ -70,6 +73,7 @@
         "tough_guy": "Harter Bursche",
         "vampire": "Vampir",
         "villager": "Dorfbewohner",
+        "werewolf_kid": "Werwolfjunges",
         "werewolf": "Werwolf",
         "witch": "Hexe"
     },
@@ -86,5 +90,6 @@
     "player_dies": "{role} ({player}) stirbt.",
     "witch_ask_heal_kill_msg": "{player} heilen oder töten?",
     "no_names": "Keine Namen hinzugefügt.",
-    "enter_player_name": "Spielernamen eingeben"
+    "enter_player_name": "Spielernamen eingeben",
+    "changed_role": "{player} (zuvor {oldRole}) ist jetzt {newRole}."
 }

@@ -5,7 +5,9 @@ import 'package:werewolf_app/model/player/role.dart';
 import 'package:werewolf_app/model/roles/armor.dart';
 import 'package:werewolf_app/model/roles/blink_girl.dart';
 import 'package:werewolf_app/model/roles/bodyguard.dart';
+import 'package:werewolf_app/model/roles/cursed.dart';
 import 'package:werewolf_app/model/roles/gerber.dart';
+import 'package:werewolf_app/model/roles/ghost.dart';
 import 'package:werewolf_app/model/roles/hunter.dart';
 import 'package:werewolf_app/model/roles/idiot.dart';
 import 'package:werewolf_app/model/roles/lykanthropin.dart';
@@ -19,6 +21,7 @@ import 'package:werewolf_app/model/roles/tough_guy.dart';
 import 'package:werewolf_app/model/roles/vampire.dart';
 import 'package:werewolf_app/model/roles/villager.dart';
 import 'package:werewolf_app/model/roles/werewolf.dart';
+import 'package:werewolf_app/model/roles/werewolf_kid.dart';
 import 'package:werewolf_app/model/roles/witch.dart';
 
 class ViewModel {
@@ -27,7 +30,9 @@ class ViewModel {
     Armor(),
     BlinkGirl(),
     Bodyguard(),
+    Cursed(),
     Gerber(),
+    Ghost(),
     Hunter(),
     Idiot(),
     Lykanthropin(),
@@ -40,6 +45,7 @@ class ViewModel {
     ToughGuy(),
     Vampire(),
     Villager(),
+    WerewolfKid(),
     Werewolf(),
     Witch(),
   ];
