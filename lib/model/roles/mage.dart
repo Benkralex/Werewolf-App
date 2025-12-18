@@ -35,6 +35,13 @@ class Mage extends Role {
         .where((p) => (p.isAlive && p.diesAt != null))
         .toList();
     for (Player p2 in dyingPlayers) {
+      if (p2.role.name == "role.old_man" &&
+          game.gameState.nightCount ==
+              game.players
+                  .where((p2) => p2.role.name == "role.werewolf")
+                  .length) {
+        continue;
+      }
       List<String> options = ["option.skip"];
       if (p.properties["property.kills"] > 0) options.add("option.kill");
       if (p.properties["property.heals"] > 0) options.add("option.heal");

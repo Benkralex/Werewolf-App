@@ -16,6 +16,7 @@ import 'package:werewolf_app/model/roles/lykanthropin.dart';
 import 'package:werewolf_app/model/roles/mage.dart';
 import 'package:werewolf_app/model/roles/mayor.dart';
 import 'package:werewolf_app/model/roles/minion.dart';
+import 'package:werewolf_app/model/roles/old_man.dart';
 import 'package:werewolf_app/model/roles/pacifist.dart';
 import 'package:werewolf_app/model/roles/priest.dart';
 import 'package:werewolf_app/model/roles/prince.dart';
@@ -45,6 +46,7 @@ class ViewModel {
     Mage(),
     Mayor(),
     Minion(),
+    OldMan(),
     Pacifist(),
     Priest(),
     Prince(),
