@@ -1,8 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/game/game_time.dart';
 import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolf_app/model/roles/seerin.dart';
 import 'package:werewolf_app/model/roles/villager.dart';
 
 class Seer extends Role {
@@ -28,13 +28,7 @@ class Seer extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    Player target = await game.selectPlayer(game.alivePlayers.where((i) => i != p).toList(), "selection.see_player_role", p);
-    game.showMessage(
-      "show_role_message".tr(namedArgs: {
-        "name": target.name,
-        "role": target.role.name.tr(),
-      }),
-    );
+    Seerin().onNightAction(game, p);
   }
 
   @override

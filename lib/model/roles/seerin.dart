@@ -28,12 +28,20 @@ class Seerin extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    Player target = await game.selectPlayer(game.alivePlayers.where((i) => i != p).toList(), "selection.see_player_role", p);
+    Player target = await game.selectPlayer(
+      game.alivePlayers.where((i) => i != p).toList(),
+      "selection.see_player_role",
+      p,
+    );
     game.showMessage(
-      "show_role_message".tr(namedArgs: {
-        "name": target.name,
-        "role": target.role.name.tr(),
-      }),
+      "show_role_message".tr(
+        namedArgs: {
+          "name": target.name,
+          "role": (target.role.name == "role.lykanthropin")
+              ? "role.werewolf".tr()
+              : target.role.name.tr(),
+        },
+      ),
     );
   }
 
