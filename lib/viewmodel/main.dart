@@ -60,6 +60,8 @@ class ViewModel {
     Witch(),
   ];
 
+  static List<String> names = [];
+
   // Colors
   static Color iconButtonActiveColor(BuildContext context) {
     return Theme.of(context).colorScheme.primary;

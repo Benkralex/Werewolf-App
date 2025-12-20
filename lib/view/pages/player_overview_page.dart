@@ -148,8 +148,9 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (ViewModel.gameController == null)
+    if (ViewModel.gameController == null) {
       throw Exception('GameController is null');
+    }
 
     final players = List<Player>.from(ViewModel.gameController!.players);
     players.sort((a, b) => (a.isAlive ? 0 : 1).compareTo((b.isAlive ? 0 : 1)));

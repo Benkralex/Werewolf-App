@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/view/pages/init_names_page.dart';
+import 'package:werewolf_app/view/pages/play_page.dart';
+import 'package:werewolf_app/view/pages/player_overview_page.dart';
 import 'package:werewolf_app/viewmodel/main.dart';
 
-class CreateGamePage extends StatefulWidget {
-  const CreateGamePage({super.key});
+class SetupRolesPage extends StatefulWidget {
+  const SetupRolesPage({super.key});
 
   @override
-  State<CreateGamePage> createState() => CreateGamePageState();
+  State<SetupRolesPage> createState() => SetupRolesPageState();
 }
 
-class CreateGamePageState extends State<CreateGamePage> {
+class SetupRolesPageState extends State<SetupRolesPage> {
   Map<Role, int> roles = {};
 
   @override
@@ -21,11 +22,6 @@ class CreateGamePageState extends State<CreateGamePage> {
     super.initState();
     if (ViewModel.gameController?.gameState.gameFinished == true) {
       List<Player> players = ViewModel.gameController?.players ?? [];
-      ViewModel.playerNames = players
-          .map((p) => p.name)
-          .toList()
-          .where((name) => !name.startsWith('player'.tr()))
-          .toList();
       ViewModel.gameController = null;
       for (Player p in players) {
         Role role = p.role;
@@ -151,6 +147,12 @@ class CreateGamePageState extends State<CreateGamePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('choose_roles').tr(),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -164,26 +166,29 @@ class CreateGamePageState extends State<CreateGamePage> {
           ? Center(child: Text('no_roles').tr())
           : ListView(children: listTiles),
       floatingActionButton: FloatingActionButton.extended(
-        label: (roles.values.fold<int>(0, (a, b) => a + b) >= 5)
-            ? Text('continue_with_count').tr(
+        label:
+            (roles.values.fold<int>(0, (a, b) => a + b) ==
+                ViewModel.names.length)
+            ? Text('option.next').tr()
+            : Text('role_count_not_reached').tr(
                 namedArgs: {
                   "count": roles.values
                       .fold<int>(0, (a, b) => a + b)
                       .toString(),
+                  "maxCount": ViewModel.names.length.toString(),
                 },
-              )
-            : Text('too_less_roles').tr(),
+              ),
         onPressed: () {
           int count = roles.values.fold<int>(0, (a, b) => a + b);
-          if (count < 5) {
+          if (count != ViewModel.names.length) {
             return;
           }
           List<Player> players = [];
+          List<String> names = ViewModel.names.toList();
+          names.shuffle();
           roles.forEach((role, c) {
             for (int i = 0; i < c; i++) {
-              players.add(
-                Player("${'player'.tr()} ${players.length + 1}", role),
-              );
+              players.add(Player(names.removeLast(), role));
             }
           });
           ViewModel.gameController = GameController(players);
@@ -191,7 +196,16 @@ class CreateGamePageState extends State<CreateGamePage> {
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation1, animation2) =>
-                  const InitNamesPage(),
+                  const PlayPage(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
+            ),
+          );
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) =>
+                  const PlayerOverviewPage(),
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero,
             ),

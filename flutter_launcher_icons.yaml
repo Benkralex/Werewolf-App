@@ -1,0 +1,34 @@
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: "assets/icons/werwolf-icon.png"
+
+  android: "launcher_icon"
+  # image_path_android: "assets/icon/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_background: "assets/icons/werwolf-icon-background.png"
+  adaptive_icon_foreground: "assets/icons/werwolf-icon-foreground.png"
+  # adaptive_icon_foreground_inset: 16
+  adaptive_icon_monochrome: "assets/icons/werwolf-icon-foreground.png"
+
+  ios: true
+  # image_path_ios: "assets/icon/icon.png"
+  remove_alpha_ios: true
+  image_path_ios_dark_transparent: "assets/icons/werwolf-icon-foreground.png"
+  image_path_ios_tinted_grayscale: "assets/icons/werwolf-icon-foreground.png"
+  desaturate_tinted_to_grayscale_ios: true
+  # background_color_ios: "#ffffff"
+
+  web:
+    generate: true
+    image_path: "assets/icons/werwolf-icon-foreground.png"
+    background_color: "#000000"
+    theme_color: "#2196FF"
+
+  windows:
+    generate: true
+    image_path: "assets/icons/werwolf-icon-foreground.png"
+    icon_size: 48 # min:48, max:256, default: 48
+
+  macos:
+    generate: true
+    image_path: "assets/icons/werwolf-icon.png"

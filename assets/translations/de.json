@@ -98,6 +98,8 @@
     "changed_role": "{player} (zuvor {oldRole}) ist jetzt {newRole}.",
     "minion_will_wake_up": "(Info) {player} (Günstling) wird diese Nacht mit den Werwölfen aufwachen.",
     "continue_with_count": "Mit {count} Rollen fortfahren",
-    "too_less_roles": "Wähle min. 5 Rollen",
-    "continue_with_names": "{count}/{maxCount} Namen"
+    "role_count_not_reached": "{count}/{maxCount} Rollen",
+    "continue_with_names": "{count}/{maxCount} Namen",
+    "selected_players_count": "{count} Spieler",
+    "add_player_name": "Spielernamen hinzufügen"
 }

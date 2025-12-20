@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:system_theme/system_theme.dart';
-import 'package:werewolf_app/view/pages/create_game_page.dart';
+import 'package:werewolf_app/view/pages/setup_names_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,10 +11,11 @@ Future<void> main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('de')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('de'),
-        child: const WerewolfApp()),
+      supportedLocales: const [Locale('en'), Locale('de')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('de'),
+      child: const WerewolfApp(),
+    ),
   );
 }
 
@@ -30,19 +31,20 @@ class WerewolfApp extends StatelessWidget {
       title: 'Werewolf',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: SystemTheme.accentColor.accent,
-            brightness: Brightness.light),
+          seedColor: SystemTheme.accentColor.accent,
+          brightness: Brightness.light,
+        ),
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: SystemTheme.accentColor.accent,
-            brightness: Brightness.dark),
+          seedColor: SystemTheme.accentColor.accent,
+          brightness: Brightness.dark,
+        ),
         useMaterial3: true,
       ),
       themeMode: ThemeMode.system,
-      home: const CreateGamePage(),
+      home: const SetupNamesPage(),
     );
   }
 }
-
