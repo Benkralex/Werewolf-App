@@ -1,18 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/viewmodel/main.dart';
+import 'package:werewolf_app/view/helpers/color_helpers.dart';
 
 class SelectPlayerDialog extends StatefulWidget {
   final List<Player> players;
   final String message;
   final Player askingPlayer;
+  final ValueChanged<Player?>? onResult;
 
   const SelectPlayerDialog({
     super.key,
     required this.players,
     required this.message,
     required this.askingPlayer,
+    this.onResult,
   });
 
   @override
@@ -31,7 +33,7 @@ class _SelectPlayerDialogState extends State<SelectPlayerDialog> {
           Text(
             widget.message.tr(),
             style: TextStyle(
-              color: ViewModel.textColor(context),
+              color: ColorHelpers.onSurfaceColor(context),
               fontSize: 32.0,
             ),
           ),
@@ -40,7 +42,7 @@ class _SelectPlayerDialogState extends State<SelectPlayerDialog> {
                 ? widget.askingPlayer.role.name.tr()
                 : "${widget.askingPlayer.role.name.tr()} (${widget.askingPlayer.name})",
             style: TextStyle(
-              color: ViewModel.textColor(context).withAlpha(200),
+              color: ColorHelpers.onSurfaceVariantColor(context),
               fontSize: 16.0,
             ),
           ),
@@ -63,10 +65,13 @@ class _SelectPlayerDialogState extends State<SelectPlayerDialog> {
                                   : ""),
                         ),
                         selected: isSelected,
-                        selectedTileColor: ViewModel.primaryColor(context),
-                        selectedColor: Colors.black,
+                        selectedTileColor: ColorHelpers.onPrimaryColor(context),
+                        selectedColor: ColorHelpers.primaryColor(context),
                         trailing: isSelected
-                            ? const Icon(Icons.check, color: Colors.black)
+                            ? Icon(
+                                Icons.check,
+                                color: ColorHelpers.primaryColor(context),
+                              )
                             : null,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -96,7 +101,11 @@ class _SelectPlayerDialogState extends State<SelectPlayerDialog> {
               ),
               onPressed: selectedPlayer != null
                   ? () {
-                      Navigator.of(context).pop(selectedPlayer);
+                      if (widget.onResult != null) {
+                        widget.onResult!(selectedPlayer);
+                      } else {
+                        Navigator.of(context).pop(selectedPlayer);
+                      }
                     }
                   : null,
               child: Text('selection.select_player'.tr()),

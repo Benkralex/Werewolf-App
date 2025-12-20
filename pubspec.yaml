@@ -13,8 +13,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_launcher_icons: ^0.14.4
   rename_app: ^1.6.5
-  system_theme: ^3.1.2
   easy_localization: ^3.0.8
+  dynamic_color: ^1.8.1
+  shared_preferences: ^2.5.4
+  flutter_colorpicker: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +28,16 @@ flutter:
   assets:
     - assets/icons/werwolf-icon.png
     - assets/translations/
+  fonts:
+    - family: Baloo2
+      fonts:
+        - asset: assets/fonts/baloo_2_regular.ttf
+          weight: 400
+        - asset: assets/fonts/baloo_2_medium.ttf
+          weight: 500
+        - asset: assets/fonts/baloo_2_semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/baloo_2_bold.ttf
+          weight: 700
+        - asset: assets/fonts/baloo_2_extra_bold.ttf
+          weight: 800

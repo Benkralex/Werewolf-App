@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:werewolf_app/model/player/player.dart';
@@ -15,6 +16,28 @@ class PlayPage extends StatefulWidget {
 }
 
 class PlayPageState extends State<PlayPage> {
+  Completer<dynamic>? _dialogCompleter;
+  Widget? _inlineDialog;
+
+  Future<T?> _showInlineDialog<T>(Widget dialog) {
+    var completer = Completer<T?>();
+    _dialogCompleter = completer;
+    setState(() {
+      _inlineDialog = dialog;
+    });
+    return completer.future;
+  }
+
+  void _closeInlineDialog(dynamic result) {
+    if (_dialogCompleter != null && !_dialogCompleter!.isCompleted) {
+      _dialogCompleter!.complete(result);
+    }
+    setState(() {
+      _inlineDialog = null;
+      _dialogCompleter = null;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -25,19 +48,33 @@ class PlayPageState extends State<PlayPage> {
     // Initialize callbacks for ViewModel
     ViewModel.selectPlayerCallback =
         (List<Player> players, String message, Player askingPlayer) async {
-          return await selectPlayerDialog(
-            context,
-            players,
-            message,
-            askingPlayer,
+          return await _showInlineDialog<Player>(
+            SelectPlayerDialog(
+              players: players,
+              message: message,
+              askingPlayer: askingPlayer,
+              onResult: (player) => _closeInlineDialog(player),
+            ),
           );
         };
     ViewModel.showMessageCallback = (String message) async {
-      return await msgDialog(context, message);
+      await _showInlineDialog<void>(
+        MessageDialog(
+          message: message,
+          onResult: () => _closeInlineDialog(null),
+        ),
+      );
     };
     ViewModel.askCallback =
         (String msg, String askedBy, List<String> options) async {
-          return await askDialog(context, msg, askedBy, options);
+          return await _showInlineDialog<String>(
+            AskDialog(
+              msg: msg,
+              askedBy: askedBy,
+              options: options,
+              onResult: (result) => _closeInlineDialog(result),
+            ),
+          );
         };
   }
 
@@ -67,58 +104,70 @@ class PlayPageState extends State<PlayPage> {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          'gametime.${ViewModel.gameController!.gameState.time.toString()}'
-              .tr(),
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
+      body: Stack(
+        children: [
+          Center(
+            child: Text(
+              'gametime.${ViewModel.gameController!.gameState.time.toString()}'
+                  .tr(),
+              style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          if (_inlineDialog != null)
+            Container(
+              color: Colors.black54,
+              child: Center(child: _inlineDialog),
+            ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          bool gameFinished = ViewModel.gameController!.gameState.gameFinished;
-          if (!gameFinished) {
-            await ViewModel.gameController!.next();
-            setState(() {});
-          } else {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('dialog_title.game_finished').tr(),
-                  content: Text(
-                    'win_msg'.tr(
-                      namedArgs: {
-                        'winner': ViewModel
-                            .gameController!
-                            .gameState
-                            .winningGroups
-                            .map((group) => "role.$group".tr())
-                            .join(", "),
-                      },
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      child: const Text('option.new_game').tr(),
-                      onPressed: () async {
-                        await Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/',
-                          (Route<dynamic> route) => false,
-                        );
-                      },
-                    ),
-                  ],
-                );
+      floatingActionButton: (_inlineDialog == null)
+          ? FloatingActionButton.large(
+              onPressed: () async {
+                bool gameFinished =
+                    ViewModel.gameController!.gameState.gameFinished;
+                if (!gameFinished) {
+                  await ViewModel.gameController!.next();
+                  setState(() {});
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('dialog_title.game_finished').tr(),
+                        content: Text(
+                          'win_msg'.tr(
+                            namedArgs: {
+                              'winner': ViewModel
+                                  .gameController!
+                                  .gameState
+                                  .winningGroups
+                                  .map((group) => "role.$group".tr())
+                                  .join(", "),
+                            },
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('option.new_game').tr(),
+                            onPressed: () async {
+                              await Navigator.of(
+                                context,
+                              ).pushNamedAndRemoveUntil(
+                                '/',
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
-            );
-          }
-        },
-        tooltip: 'option.next'.tr(),
-        icon: const Icon(Icons.arrow_forward),
-        label: const Text('option.next').tr(),
-      ),
+              child: const Icon(Icons.arrow_forward),
+            )
+          : null,
     );
   }
 }

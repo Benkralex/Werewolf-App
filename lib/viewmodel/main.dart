@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
@@ -61,27 +60,6 @@ class ViewModel {
   ];
 
   static List<String> names = [];
-
-  // Colors
-  static Color iconButtonActiveColor(BuildContext context) {
-    return Theme.of(context).colorScheme.primary;
-  }
-
-  static Color iconButtonInactiveColor(BuildContext context) {
-    return Theme.of(context).colorScheme.primary.withValues(alpha: 0.6);
-  }
-
-  static Color primaryColor(BuildContext context) {
-    return Theme.of(context).colorScheme.primary;
-  }
-
-  static Color secondaryColor(BuildContext context) {
-    return Theme.of(context).colorScheme.secondary;
-  }
-
-  static Color textColor(BuildContext context) {
-    return Theme.of(context).colorScheme.onSurface;
-  }
 
   // Callbacks
   static Function? selectPlayerCallback;

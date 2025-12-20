@@ -1,13 +1,17 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:system_theme/system_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:werewolf_app/view/pages/setup_names_page.dart';
+
+late final SharedPreferences prefs;
+final ValueNotifier<int?> seedColor = ValueNotifier(null);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await SystemTheme.accentColor.load();
-  SystemTheme.fallbackColor = Colors.blue;
+  prefs = await SharedPreferences.getInstance();
+  seedColor.value = prefs.getInt('seedColor');
 
   runApp(
     EasyLocalization(
@@ -24,27 +28,54 @@ class WerewolfApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      title: 'Werewolf',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: SystemTheme.accentColor.accent,
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: SystemTheme.accentColor.accent,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
-      themeMode: ThemeMode.system,
-      home: const SetupNamesPage(),
+    return ValueListenableBuilder<int?>(
+      valueListenable: seedColor,
+      builder: (context, colorValue, child) {
+        return DynamicColorBuilder(
+          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+            ColorScheme lightColorScheme =
+                (lightDynamic != null && colorValue == null)
+                ? lightDynamic
+                : ColorScheme.fromSeed(
+                    seedColor: colorValue != null
+                        ? Color(colorValue)
+                        : Colors.blue,
+                    brightness: Brightness.light,
+                  );
+            ColorScheme darkColorScheme =
+                (darkDynamic != null && colorValue == null)
+                ? darkDynamic
+                : ColorScheme.fromSeed(
+                    seedColor: colorValue != null
+                        ? Color(colorValue)
+                        : Colors.blue,
+                    brightness: Brightness.dark,
+                  );
+
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              title: 'Werewolf',
+              themeMode: ThemeMode.system,
+              theme: ThemeData(
+                useMaterial3: true,
+                colorScheme: lightColorScheme,
+                scaffoldBackgroundColor: lightColorScheme.surface,
+                fontFamily: 'Baloo2',
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                colorScheme: darkColorScheme,
+                scaffoldBackgroundColor: darkColorScheme.surface,
+                fontFamily: 'Baloo2',
+              ),
+              home: const SetupNamesPage(),
+            );
+          },
+        );
+      },
     );
   }
 }

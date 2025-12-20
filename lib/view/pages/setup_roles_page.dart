@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:werewolf_app/model/game/game_controller.dart';
 import 'package:werewolf_app/model/player/player.dart';
 import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolf_app/view/helpers/color_helpers.dart';
 import 'package:werewolf_app/view/pages/play_page.dart';
 import 'package:werewolf_app/view/pages/player_overview_page.dart';
 import 'package:werewolf_app/viewmodel/main.dart';
@@ -118,20 +119,23 @@ class SetupRolesPageState extends State<SetupRolesPage> {
                       }
                     });
                   },
-                  color: ViewModel.iconButtonActiveColor(context),
+                  color: ColorHelpers.primaryColor(context),
                 ),
                 IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (count < role.maxPlayers) {
-                        roles[role] = count + 1;
-                      }
-                    });
-                  },
+                  onPressed: (count < role.maxPlayers)
+                      ? () {
+                          setState(() {
+                            if (count < role.maxPlayers) {
+                              roles[role] = count + 1;
+                            }
+                          });
+                        }
+                      : null,
                   icon: const Icon(Icons.add),
-                  color: (count < role.maxPlayers)
-                      ? ViewModel.iconButtonActiveColor(context)
-                      : ViewModel.iconButtonInactiveColor(context),
+                  color: ColorHelpers.primaryColor(context),
+                  disabledColor: ColorHelpers.getDisabledColor(
+                    ColorHelpers.primaryColor(context),
+                  ),
                 ),
               ],
             ),
@@ -162,58 +166,61 @@ class SetupRolesPageState extends State<SetupRolesPage> {
           ),
         ],
       ),
-      body: listTiles.isEmpty
-          ? Center(child: Text('no_roles').tr())
-          : ListView(children: listTiles),
-      floatingActionButton: FloatingActionButton.extended(
-        label:
-            (roles.values.fold<int>(0, (a, b) => a + b) ==
-                ViewModel.names.length)
-            ? Text('option.next').tr()
-            : Text('role_count_not_reached').tr(
-                namedArgs: {
-                  "count": roles.values
-                      .fold<int>(0, (a, b) => a + b)
-                      .toString(),
-                  "maxCount": ViewModel.names.length.toString(),
-                },
-              ),
-        onPressed: () {
-          int count = roles.values.fold<int>(0, (a, b) => a + b);
-          if (count != ViewModel.names.length) {
-            return;
-          }
-          List<Player> players = [];
-          List<String> names = ViewModel.names.toList();
-          names.shuffle();
-          roles.forEach((role, c) {
-            for (int i = 0; i < c; i++) {
-              players.add(Player(names.removeLast(), role));
-            }
-          });
-          ViewModel.gameController = GameController(players);
-          Navigator.push(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation1, animation2) =>
-                  const PlayPage(),
-              transitionDuration: Duration.zero,
-              reverseTransitionDuration: Duration.zero,
-            ),
-          );
-          Navigator.push(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation1, animation2) =>
-                  const PlayerOverviewPage(),
-              transitionDuration: Duration.zero,
-              reverseTransitionDuration: Duration.zero,
-            ),
-          );
-        },
-        tooltip: 'option.next'.tr(),
-        icon: const Icon(Icons.arrow_forward),
+      body: Column(
+        children: [
+          Text('setup_role_count').tr(
+            namedArgs: {
+              'count': roles.values.fold<int>(0, (a, b) => a + b).toString(),
+              'total': ViewModel.names.length.toString(),
+            },
+          ),
+          Expanded(
+            child: listTiles.isEmpty
+                ? Center(child: Text('no_roles').tr())
+                : ListView(children: listTiles),
+          ),
+        ],
       ),
+      floatingActionButton:
+          (roles.values.fold<int>(0, (a, b) => a + b) == ViewModel.names.length)
+          ? FloatingActionButton.large(
+              onPressed: () {
+                int count = roles.values.fold<int>(0, (a, b) => a + b);
+                if (count != ViewModel.names.length) {
+                  return;
+                }
+                List<Player> players = [];
+                List<String> names = ViewModel.names.toList();
+                names.shuffle();
+                roles.forEach((role, c) {
+                  for (int i = 0; i < c; i++) {
+                    players.add(Player(names.removeLast(), role));
+                  }
+                });
+                ViewModel.gameController = GameController(players);
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        const PlayPage(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ),
+                );
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        const PlayerOverviewPage(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ),
+                );
+              },
+              tooltip: 'option.next'.tr(),
+              child: const Icon(Icons.arrow_forward),
+            )
+          : null,
     );
   }
 }

@@ -163,7 +163,9 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
             title: Text(
               player.name,
               style: TextStyle(
-                color: player.isAlive ? Colors.white : Colors.grey,
+                color: player.isAlive
+                    ? Theme.of(context).colorScheme.onSurface
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             subtitle: Text(
@@ -171,8 +173,8 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
                   ((player.notes != "") ? ("\n${player.notes}") : ""),
               style: TextStyle(
                 color: player.isAlive
-                    ? Colors.grey.shade300
-                    : Colors.grey.shade600,
+                    ? Theme.of(context).colorScheme.onSurface
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             trailing: Row(
@@ -183,21 +185,18 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
                     editPlayer(player);
                   },
                   icon: const Icon(Icons.edit),
-                  color: ViewModel.iconButtonActiveColor(context),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-                (player.properties.keys.isNotEmpty)
-                    ? IconButton(
-                        onPressed: () {
+                IconButton(
+                  onPressed: (player.properties.keys.isNotEmpty)
+                      ? () {
                           editProperties(player);
-                        },
-                        icon: const Icon(Icons.settings),
-                        color: ViewModel.iconButtonActiveColor(context),
-                      )
-                    : IconButton(
-                        onPressed: () => {},
-                        icon: const Icon(Icons.settings),
-                        color: ViewModel.iconButtonInactiveColor(context),
-                      ),
+                        }
+                      : null,
+                  icon: const Icon(Icons.settings),
+                  color: Theme.of(context).colorScheme.primary,
+                  disabledColor: Theme.of(context).colorScheme.secondary,
+                ),
               ],
             ),
           );

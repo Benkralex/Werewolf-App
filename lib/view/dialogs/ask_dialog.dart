@@ -5,12 +5,14 @@ class AskDialog extends StatefulWidget {
   final String msg;
   final List<String> options;
   final String askedBy;
+  final ValueChanged<String?>? onResult;
 
   const AskDialog({
     super.key,
     required this.msg,
     required this.askedBy,
     required this.options,
+    this.onResult,
   });
 
   @override
@@ -65,7 +67,11 @@ class _AskDialogState extends State<AskDialog> {
         TextButton(
           child: Text('option.accept').tr(),
           onPressed: () {
-            Navigator.of(context).pop(result);
+            if (widget.onResult != null) {
+              widget.onResult!(result);
+            } else {
+              Navigator.of(context).pop(result);
+            }
           },
         ),
       ],

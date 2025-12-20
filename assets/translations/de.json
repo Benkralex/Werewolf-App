@@ -48,7 +48,8 @@
         "cancel": "Abbrechen",
         "accept": "OK",
         "next": "Weiter",
-        "new_game": "Neues Spiel"
+        "new_game": "Neues Spiel",
+        "reset": "Zurücksetzen"
     },
     "error": {
         "armor_same_player_selected": "Einfach nein..."
@@ -97,9 +98,8 @@
     "enter_player_name": "Spielernamen eingeben",
     "changed_role": "{player} (zuvor {oldRole}) ist jetzt {newRole}.",
     "minion_will_wake_up": "(Info) {player} (Günstling) wird diese Nacht mit den Werwölfen aufwachen.",
-    "continue_with_count": "Mit {count} Rollen fortfahren",
-    "role_count_not_reached": "{count}/{maxCount} Rollen",
-    "continue_with_names": "{count}/{maxCount} Namen",
     "selected_players_count": "{count} Spieler",
-    "add_player_name": "Spielernamen hinzufügen"
+    "setup_role_count": "{count}/{total} Rollen",
+    "add_player_name": "Spielernamen hinzufügen",
+    "select_app_color": "App-Farbe auswählen"
 }

@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:werewolf_app/main.dart';
 import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolf_app/view/helpers/color_helpers.dart';
 import 'package:werewolf_app/view/pages/setup_roles_page.dart';
 import 'package:werewolf_app/view/widgets/select_count_widget.dart';
 import 'package:werewolf_app/viewmodel/main.dart';
@@ -23,6 +26,9 @@ class SetupNamesPageState extends State<SetupNamesPage> {
       .toDouble();
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  Color selectedColor = prefs.getInt('seedColor') != null
+      ? Color(prefs.getInt('seedColor')!)
+      : Colors.blue;
 
   @override
   void initState() {
@@ -62,9 +68,11 @@ class SetupNamesPageState extends State<SetupNamesPage> {
           title: Text(
             name,
             style: TextStyle(
-              color: (name.startsWith('player'.tr()))
-                  ? ViewModel.textColor(context).withAlpha(150)
-                  : ViewModel.textColor(context),
+              color: (!name.startsWith('player'.tr()))
+                  ? ColorHelpers.onSurfaceColor(context)
+                  : ColorHelpers.getDisabledColor(
+                      ColorHelpers.onSurfaceColor(context),
+                    ),
             ),
           ),
           leading: SizedBox(
@@ -77,8 +85,10 @@ class SetupNamesPageState extends State<SetupNamesPage> {
                       names.remove(name);
                       setState(() {});
                     },
-              color: ViewModel.iconButtonActiveColor(context),
-              disabledColor: ViewModel.iconButtonInactiveColor(context),
+              color: Theme.of(context).colorScheme.primary,
+              disabledColor: ColorHelpers.getDisabledColor(
+                ColorHelpers.primaryColor(context),
+              ),
             ),
           ),
         ),
@@ -90,7 +100,80 @@ class SetupNamesPageState extends State<SetupNamesPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('choose_names').tr()),
+      appBar: AppBar(
+        title: const Text('choose_names').tr(),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.palette),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext bcontext) {
+                  return AlertDialog(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('select_app_color').tr(),
+                        Expanded(child: Container()),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 6.0),
+                          child: IconButton(
+                            icon: Icon(Icons.close),
+                            onPressed: () {
+                              Navigator.of(bcontext).pop();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    content: BlockPicker(
+                      pickerColor: prefs.getInt('seedColor') != null
+                          ? Color(prefs.getInt('seedColor')!)
+                          : Colors.blue,
+                      onColorChanged: (Color color) {
+                        selectedColor = color;
+                      },
+                    ),
+                    actions: <Widget>[
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: FilledButton.tonalIcon(
+                              label: Text('option.reset').tr(),
+                              icon: Icon(Icons.refresh),
+                              onPressed: () {
+                                prefs.remove('seedColor');
+                                seedColor.value = null;
+                                setState(() {});
+                                Navigator.of(bcontext).pop();
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: FilledButton.icon(
+                              label: Text('option.save').tr(),
+                              icon: Icon(Icons.check),
+                              onPressed: () {
+                                prefs.setInt('seedColor', selectedColor.value);
+                                seedColor.value = selectedColor.value;
+                                setState(() {});
+                                Navigator.of(bcontext).pop();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Padding(
@@ -134,7 +217,7 @@ class SetupNamesPageState extends State<SetupNamesPage> {
           Expanded(child: ListView(children: listTiles)),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.large(
         onPressed: () {
           ViewModel.names = names;
           Navigator.push(
