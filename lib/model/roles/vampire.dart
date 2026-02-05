@@ -8,7 +8,7 @@ class Vampire extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.vampire";
 
   @override
   String name = "role.vampire";

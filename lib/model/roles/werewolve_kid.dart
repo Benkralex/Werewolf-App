@@ -9,7 +9,7 @@ class WerewolveKid extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.werewolve_kid";
 
   @override
   String name = "role.werewolve_kid";

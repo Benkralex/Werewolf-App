@@ -57,7 +57,7 @@ class WerewolveApp extends StatelessWidget {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
-              title: 'app_name'.tr(),
+              title: 'Werewolve App',
               themeMode: ThemeMode.system,
               theme: ThemeData(
                 useMaterial3: true,

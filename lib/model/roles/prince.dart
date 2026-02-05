@@ -9,7 +9,7 @@ class Prince extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.prince";
 
   @override
   String name = "role.prince";

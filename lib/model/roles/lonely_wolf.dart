@@ -9,7 +9,7 @@ class LonelyWolf extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.lonely_wolf";
 
   @override
   String name = "role.lonely_wolf";

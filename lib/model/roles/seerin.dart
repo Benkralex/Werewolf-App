@@ -10,7 +10,7 @@ class Seerin extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.seerin";
 
   @override
   String name = "role.seerin";

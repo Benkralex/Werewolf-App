@@ -8,7 +8,7 @@ class Gerber extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.gerber";
 
   @override
   String group = "gerber";

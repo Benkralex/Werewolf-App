@@ -13,7 +13,7 @@ class Mage extends Role {
   };
 
   @override
-  String description = "";
+  String description = "description.mage";
 
   @override
   String name = "role.mage";

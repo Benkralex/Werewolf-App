@@ -9,7 +9,7 @@ class Ghost extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.ghost";
 
   @override
   String group = "villager";

@@ -13,7 +13,7 @@ class Witch extends Role {
   };
 
   @override
-  String description = "";
+  String description = "description.witch";
 
   @override
   String name = "role.witch";

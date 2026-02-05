@@ -9,7 +9,7 @@ class Priest extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.priest";
 
   @override
   String group = "villager";

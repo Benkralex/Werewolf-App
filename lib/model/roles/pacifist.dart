@@ -9,7 +9,7 @@ class Pacifist extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.pacifist";
 
   @override
   String group = "villager";

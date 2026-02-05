@@ -10,7 +10,7 @@ class Werewolve extends Role {
   };
 
   @override
-  String description = "";
+  String description = "description.werewolve";
 
   @override
   String name = "role.werewolve";

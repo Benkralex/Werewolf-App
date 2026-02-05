@@ -9,7 +9,7 @@ class BlinkGirl extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.blink_girl";
 
   @override
   String group = "villager";

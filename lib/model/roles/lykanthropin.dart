@@ -9,7 +9,7 @@ class Lykanthropin extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.lykanthropin";
 
   @override
   String group = "villager";

@@ -42,7 +42,8 @@
         "save": "Save",
         "cancel": "Cancel",
         "new_game": "New Game",
-        "reset": "Reset"
+        "reset": "Reset",
+        "close": "Close"
     },
     "error": {
         "armor_same_player_selected": "Just no..."
@@ -75,12 +76,41 @@
         "werewolve": "Werewolve",
         "witch": "Witch"
     },
+    "description": {
+        "armor": "-",
+        "blink_girl": "-",
+        "bodyguard": "-",
+        "cursed": "-",
+        "gerber": "-",
+        "ghost": "-",
+        "hunter": "-",
+        "idiot": "-",
+        "lepers": "-",
+        "lonely_wolf": "-",
+        "lykanthropin": "-",
+        "mage": "-",
+        "mayor": "-",
+        "minion": "-",
+        "old_man": "-",
+        "pacifist": "-",
+        "priest": "-",
+        "prince": "-",
+        "seer": "-",
+        "seerin": "-",
+        "tough_guy": "-",
+        "vampire": "-",
+        "villager": "-",
+        "werewolve_kid": "-",
+        "werewolve": "-",
+        "witch": "-"
+    },
     "group": {
         "villager": "Villager",
         "gerber": "Gerber",
         "lonely_wolf": "Lonely Werewolve",
         "werewolve": "Werewolve",
-        "vampire": "Vampire"
+        "vampire": "Vampire",
+        "other": "Other"
     },
     "gametime": {
         "day": "Day",

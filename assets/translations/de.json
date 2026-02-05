@@ -42,7 +42,8 @@
         "save": "Speichern",
         "cancel": "Abbrechen",
         "new_game": "Neues Spiel",
-        "reset": "Zurücksetzen"
+        "reset": "Zurücksetzen",
+        "close": "Schließen"
     },
     "error": {
         "armor_same_player_selected": "Einfach nein..."
@@ -75,12 +76,41 @@
         "werewolve": "Werwolf",
         "witch": "Hexe"
     },
+    "description": {
+        "armor": "Der Armor verliebt 2 Personen, die zusammen sterben.",
+        "blink_girl": "Das Blinzelmädchen darf heimlich spicken, ohne dass es auffällt. Es darf aber nicht sagen, das es das Blinzelmädchen ist.",
+        "bodyguard": "Der Leibwächter kann jede Nacht einen Spieler beschützen. Dieser Spieler kann in dieser Nacht nicht sterben.",
+        "cursed": "Der Verfluchte ist ein Dorfbewohner, der zum Werwolf wird, wenn er von einem Werwolf getötet wird.",
+        "gerber": "Der Gerber gewinnt, wenn er stirbt.",
+        "ghost": "Der Geist stirbt in der ersten Nacht und darf dann jede Nacht einen Hinweis geben (Symbol/Buchstabe).",
+        "hunter": "Der Jäger darf einen weiteren Spieler töten, wenn er stirbt.",
+        "idiot": "Der Idiot stimmt immer für den Tod eines Spielers.",
+        "lepers": "-",
+        "lonely_wolf": "-",
+        "lykanthropin": "-",
+        "mage": "-",
+        "mayor": "-",
+        "minion": "-",
+        "old_man": "-",
+        "pacifist": "-",
+        "priest": "-",
+        "prince": "-",
+        "seer": "-",
+        "seerin": "-",
+        "tough_guy": "-",
+        "vampire": "-",
+        "villager": "-",
+        "werewolve_kid": "-",
+        "werewolve": "-",
+        "witch": "-"
+    },
     "group": {
         "villager": "Dorfbewohner",
         "gerber": "Gerber",
         "lonely_wolf": "Einsamer Wolf",
         "werewolve": "Werwolf",
-        "vampire": "Vampir"
+        "vampire": "Vampir",
+        "other": "Sonstige"
     },
     "gametime": {
         "day": "Tag",

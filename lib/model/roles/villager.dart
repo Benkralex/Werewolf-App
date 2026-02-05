@@ -8,7 +8,7 @@ class Villager extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.villager";
 
   @override
   String name = "role.villager";

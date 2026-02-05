@@ -11,7 +11,7 @@ class Cursed extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.cursed";
 
   @override
   String group = "villager";

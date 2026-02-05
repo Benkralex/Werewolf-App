@@ -12,18 +12,27 @@ To solve this problem, I decided to build an app to help moderate the game. I st
     - Armor
     - Blink Girl
     - Bodyguard
+    - Cursed
     - Gerber
+    - Ghost
     - Hunter
     - Idiot
+    - Lerpers
+    - Lonly wolf
     - Lykanthropin
     - Mage
+    - Mayor
+    - Minion
+    - Old man
     - Pacifist
     - Priest
     - Prince
     - Seer
     - Seerin
+    - Tough guy
     - Vampire
     - Villager
+    - Werewolve kid
     - Werewolve
     - Witch
 - Diffrent Phases

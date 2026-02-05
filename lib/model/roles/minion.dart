@@ -10,7 +10,7 @@ class Minion extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.minion";
 
   @override
   String name = "role.minion";

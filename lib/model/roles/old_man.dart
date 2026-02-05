@@ -9,7 +9,7 @@ class OldMan extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.old_man";
 
   @override
   String group = "villager";

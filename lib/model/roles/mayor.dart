@@ -9,7 +9,7 @@ class Mayor extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.mayor";
 
   @override
   String group = "villager";

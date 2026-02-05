@@ -13,7 +13,7 @@ class Armor extends Role {
   };
 
   @override
-  String description = "";
+  String description = "description.armor";
 
   @override
   String group = "villager";

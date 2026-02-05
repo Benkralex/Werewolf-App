@@ -17,6 +17,7 @@ class SetupRolesPage extends StatefulWidget {
 
 class SetupRolesPageState extends State<SetupRolesPage> {
   Map<Role, int> roles = {};
+  Map<String, bool> expandedGroups = {};
 
   @override
   void initState() {
@@ -43,68 +44,158 @@ class SetupRolesPageState extends State<SetupRolesPage> {
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return DraggableScrollableSheet(
-          expand: false,
-          builder: (BuildContext context, ScrollController scrollController) {
-            return SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: (ViewModel.roles.isNotEmpty)
-                    ? () {
-                        // Group roles by their group
-                        Map<String, List<Role>> groupedRoles = {};
-                        for (Role role in ViewModel.roles.where(
-                          (Role role) => roles[role] == null,
-                        )) {
-                          String group = ('group.${role.group}').tr();
-                          if (!groupedRoles.containsKey(group)) {
-                            groupedRoles[group] = [];
-                          }
-                          groupedRoles[group]!.add(role);
-                        }
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return DraggableScrollableSheet(
+              initialChildSize: 0.9,
+              expand: false,
+              builder: (BuildContext context, ScrollController scrollController) {
+                return SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: (ViewModel.roles.isNotEmpty)
+                        ? () {
+                            // Group roles by their group
+                            Map<String, List<Role>> groupedRoles = {};
+                            for (Role role in ViewModel.roles.where(
+                              (Role role) => roles[role] == null,
+                            )) {
+                              String group = ('group.${role.group}').tr();
+                              if (!groupedRoles.containsKey(group)) {
+                                groupedRoles[group] = [];
+                              }
+                              groupedRoles[group]!.add(role);
+                            }
 
-                        // Build widgets
-                        List<Widget> widgets = [];
-                        groupedRoles.forEach((group, groupRoles) {
-                          widgets.add(
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                16.0,
-                                16.0,
-                                16.0,
-                                8.0,
-                              ),
-                              child: Text(
-                                group,
-                                style: Theme.of(context).textTheme.titleMedium
-                                    ?.copyWith(fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          );
-                          widgets.addAll(
-                            groupRoles.map((Role role) {
-                              return Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: ListTile(
-                                  title: Text(role.name).tr(),
-                                  onTap: () {
-                                    Navigator.of(context).pop(role);
-                                  },
+                            //Group roles that are single into "other"-group
+                            List<Role> singleGroupRoles = [];
+                            groupedRoles.forEach((group, groupRoles) {
+                              if (groupRoles.length == 1) {
+                                singleGroupRoles.add(groupRoles.first);
+                              }
+                            });
+                            groupedRoles.removeWhere(
+                              (group, groupRoles) => groupRoles.length == 1,
+                            );
+                            groupedRoles['group.other'.tr()] = singleGroupRoles;
+
+                            // Build widgets
+                            Map<String, List<Widget>> rolesToSelect = {};
+                            groupedRoles.forEach((group, groupRoles) {
+                              rolesToSelect[group] = groupRoles.map((
+                                Role role,
+                              ) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: ListTile(
+                                    title: Text(role.name).tr(),
+                                    onTap: () {
+                                      Navigator.of(context).pop(role);
+                                    },
+                                    onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "${role.name.tr()} (${role.difficultyIndex})",
+                                            ),
+                                            content: Text(
+                                              role.description,
+                                            ).tr(),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  'option.close',
+                                                ).tr(),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                );
+                              }).toList();
+                            });
+
+                            // Interleave titles and roles
+                            List<Widget> widgets = [Container()];
+                            for (String group in groupedRoles.keys) {
+                              widgets.add(
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    16.0,
+                                    16.0,
+                                    16.0,
+                                    8.0,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          setModalState(() {
+                                            expandedGroups[group] =
+                                                !(expandedGroups[group] ??
+                                                    false);
+                                          });
+                                        },
+                                        icon: Icon(
+                                          (expandedGroups[group] ?? false)
+                                              ? Icons.keyboard_arrow_down
+                                              : Icons.keyboard_arrow_right,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          setModalState(() {
+                                            expandedGroups[group] =
+                                                !(expandedGroups[group] ??
+                                                    false);
+                                          });
+                                        },
+                                        style: TextButton.styleFrom(
+                                          splashFactory: NoSplash.splashFactory,
+                                        ),
+                                        child: Text(
+                                          group,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ),
+                                      Expanded(child: Container()),
+                                    ],
+                                  ),
                                 ),
                               );
-                            }),
-                          );
-                        });
-                        return widgets;
-                      }()
-                    : [
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: const Text("no_roles").tr(),
-                        ),
-                      ],
-              ),
+                              widgets.add(
+                                Visibility(
+                                  visible: expandedGroups[group] ?? false,
+                                  child: Column(
+                                    children: rolesToSelect[group] ?? [],
+                                  ),
+                                ),
+                              );
+                            }
+                            return widgets;
+                          }()
+                        : [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: const Text("no_roles").tr(),
+                            ),
+                          ],
+                  ),
+                );
+              },
             );
           },
         );
@@ -193,6 +284,7 @@ class SetupRolesPageState extends State<SetupRolesPage> {
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
+              expandedGroups = {};
               _showRoleSelectionSheet();
             },
           ),

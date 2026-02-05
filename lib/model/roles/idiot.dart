@@ -9,7 +9,7 @@ class Idiot extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.idiot";
 
   @override
   String group = "villager";

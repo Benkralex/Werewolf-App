@@ -9,7 +9,7 @@ class Hunter extends Role {
   Map<String, dynamic> defaultProperties = {};
 
   @override
-  String description = "";
+  String description = "description.hunter";
 
   @override
   String group = "villager";
