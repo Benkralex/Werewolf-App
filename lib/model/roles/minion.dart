@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/werewolf.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/werewolve.dart';
 
 class Minion extends Role {
   @override
@@ -16,14 +16,17 @@ class Minion extends Role {
   String name = "role.minion";
 
   @override
-  String group = "werewolf";
+  String group = "werewolve";
 
   @override
-  GameTime nightActionTime = GameTime.withWerewolfs;
+  GameTime nightActionTime = GameTime.preWerewolves;
+
+  @override
+  int difficultyIndex = -6;
 
   @override
   bool checkWin(GameController game, Player p) {
-    return Werewolf().checkWin(game, p);
+    return Werewolve().checkWin(game, p);
   }
 
   @override

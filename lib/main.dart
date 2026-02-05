@@ -2,7 +2,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:werewolf_app/view/pages/setup_names_page.dart';
+import 'package:werewolve_app/view/pages/setup_names_page.dart';
 
 late final SharedPreferences prefs;
 final ValueNotifier<int?> seedColor = ValueNotifier(null);
@@ -18,13 +18,13 @@ Future<void> main() async {
       supportedLocales: const [Locale('en'), Locale('de')],
       path: 'assets/translations',
       fallbackLocale: const Locale('de'),
-      child: const WerewolfApp(),
+      child: const WerewolveApp(),
     ),
   );
 }
 
-class WerewolfApp extends StatelessWidget {
-  const WerewolfApp({super.key});
+class WerewolveApp extends StatelessWidget {
+  const WerewolveApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class WerewolfApp extends StatelessWidget {
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
               locale: context.locale,
-              title: 'Werewolf',
+              title: 'app_name'.tr(),
               themeMode: ThemeMode.system,
               theme: ThemeData(
                 useMaterial3: true,

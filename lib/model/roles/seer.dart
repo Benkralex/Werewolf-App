@@ -1,9 +1,9 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/seerin.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/seerin.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class Seer extends Role {
   @override
@@ -19,7 +19,10 @@ class Seer extends Role {
   String group = "villager";
 
   @override
-  GameTime nightActionTime = GameTime.preWerewolfs;
+  GameTime nightActionTime = GameTime.preWerewolves;
+
+  @override
+  int difficultyIndex = 7;
 
   @override
   bool checkWin(GameController game, Player p) {

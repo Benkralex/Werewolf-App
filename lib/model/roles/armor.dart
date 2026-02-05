@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class Armor extends Role {
   @override
@@ -22,7 +22,10 @@ class Armor extends Role {
   String name = "role.armor";
 
   @override
-  GameTime nightActionTime = GameTime.preWerewolfs;
+  GameTime nightActionTime = GameTime.preWerewolves;
+
+  @override
+  int difficultyIndex = -3;
 
   @override
   bool checkWin(GameController game, Player p) {

@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:werewolf_app/model/game/game_state.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
-import 'package:werewolf_app/viewmodel/main.dart';
+import 'package:werewolve_app/model/game/game_state.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
+import 'package:werewolve_app/viewmodel/main.dart';
 
 class GameController {
   List<Player> players;
@@ -47,16 +47,22 @@ class GameController {
   }
 
   Future<void> update() async {
-    checkForWins();
+    await showWakeUpMessages();
+    await checkForWins();
     await unalivePlayers();
-    checkForWins();
+    await checkForWins();
     await lynchPlayer();
-    checkForWins();
+    await checkForWins();
     updatePlayerProtection();
-    checkForWins();
+    await checkForWins();
   }
 
-  void checkForWins() {
+  Future<void> showWakeUpMessages() async {
+    if (!gameState.time.isSunrise) return;
+    await ViewModel.showMessage("everyone_wake_up".tr());
+  }
+
+  Future<void> checkForWins() async {
     List<String> winningGroups = [];
     for (Player p in players) {
       if (p.role.checkWin(this, p)) {
@@ -64,6 +70,7 @@ class GameController {
           winningGroups.add(p.role.group);
         }
         gameState.gameFinished = true;
+        await ViewModel.showWin();
       }
     }
     gameState.winningGroups = winningGroups;
@@ -71,23 +78,23 @@ class GameController {
 
   Future<void> lynchPlayer() async {
     if (gameState.gameFinished) return;
-    if (gameState.time == GameTime.sunrise) {
+    if (gameState.time == GameTime.sunset) {
       Player p = await selectPlayer(
         alivePlayers,
         "selection.select_player_lynch",
         Player("village".tr(), Villager()),
       );
       p.isAlive = false;
-      p.role.onLynch(this, p);
+      await p.role.onLynch(this, p);
       if (p.isAlive) return;
-      showMessage(
+      await showMessage(
         "player_dies".tr(
           namedArgs: {"player": p.name, "role": p.role.name.tr()},
         ),
       );
       for (Player p2 in p.killsOnDeath) {
         if (!p2.isAlive) continue;
-        killPlayerNow(p2);
+        await killPlayerNow(p2);
       }
     }
   }
@@ -115,7 +122,7 @@ class GameController {
     );
     for (Player p in p.killsOnDeath) {
       if (!p.isAlive) continue;
-      killPlayerNow(p);
+      await killPlayerNow(p);
     }
   }
 

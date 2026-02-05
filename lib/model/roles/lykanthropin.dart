@@ -1,8 +1,8 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class Lykanthropin extends Role {
   @override
@@ -19,6 +19,9 @@ class Lykanthropin extends Role {
 
   @override
   GameTime nightActionTime = GameTime.sunrise;
+
+  @override
+  int difficultyIndex = -1;
 
   @override
   bool checkWin(GameController game, Player p) {

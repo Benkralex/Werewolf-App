@@ -1,4 +1,4 @@
-import 'package:werewolf_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/player.dart';
 
 import '../game/game_controller.dart';
 import '../game/game_time.dart';
@@ -11,6 +11,7 @@ abstract class Role {
   abstract String group;
   abstract String description;
   abstract int maxPlayers;
+  abstract int difficultyIndex;
 
   //Win
   bool checkWin(GameController game, Player p) {

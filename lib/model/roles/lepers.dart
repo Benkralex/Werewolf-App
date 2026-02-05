@@ -1,8 +1,8 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/werewolf.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/werewolve.dart';
 
 class Lepers extends Role {
   @override
@@ -21,14 +21,17 @@ class Lepers extends Role {
   GameTime nightActionTime = GameTime.sunrise;
 
   @override
+  int difficultyIndex = 3;
+
+  @override
   bool checkWin(GameController game, Player p) {
-    return Werewolf().checkWin(game, p);
+    return Werewolve().checkWin(game, p);
   }
 
   @override
   Future<void> onDeath(GameController game, Player p) async {
-    if (p.killedBy?.role.name == "role.werewolf") {
-      Werewolf().editPropertyForEveryWerewolf(
+    if (p.killedBy?.role.name == "role.werewolve") {
+      Werewolve().editPropertyForEveryWerewolve(
         game,
         "property.next_night_victim_count",
         0,

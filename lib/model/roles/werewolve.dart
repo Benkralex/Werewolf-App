@@ -1,9 +1,9 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
 
-class Werewolf extends Role {
+class Werewolve extends Role {
   @override
   Map<String, dynamic> defaultProperties = {
     "property.next_night_victim_count": 1,
@@ -13,13 +13,16 @@ class Werewolf extends Role {
   String description = "";
 
   @override
-  String name = "role.werewolf";
+  String name = "role.werewolve";
 
   @override
-  String group = "werewolf";
+  String group = "werewolve";
 
   @override
-  GameTime nightActionTime = GameTime.withWerewolfs;
+  GameTime nightActionTime = GameTime.withWerewolves;
+
+  @override
+  int difficultyIndex = -6;
 
   @override
   bool checkWin(GameController game, Player p) {
@@ -28,7 +31,7 @@ class Werewolf extends Role {
       (role) => role.group == "vampire",
     );
     for (Player p2 in game.alivePlayers) {
-      if (p2.role.group == "werewolf") count++;
+      if (p2.role.group == "werewolve") count++;
     }
     if (vampiresArePlaying) {
       return count == game.alivePlayers.length;
@@ -46,16 +49,16 @@ class Werewolf extends Role {
     ) {
       await killAPlayer(game, p);
     }
-    editPropertyForEveryWerewolf(game, "property.next_night_victim_count", 1);
+    editPropertyForEveryWerewolve(game, "property.next_night_victim_count", 1);
   }
 
-  void editPropertyForEveryWerewolf(
+  void editPropertyForEveryWerewolve(
     GameController game,
     String property,
     dynamic value,
   ) {
     for (Player p2 in game.players) {
-      if (p2.role.name == "role.werewolf") {
+      if (p2.role.name == "role.werewolve") {
         p2.properties[property] = value;
       }
     }
@@ -67,7 +70,7 @@ class Werewolf extends Role {
         game.alivePlayers
             .where(
               (p) =>
-                  p.role.group != "werewolf" && p.role.group != "lonely_wolf",
+                  p.role.group != "werewolve" && p.role.group != "lonely_wolf",
             )
             .toList(),
         "selection.select_player_kill",

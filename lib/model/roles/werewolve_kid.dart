@@ -1,10 +1,10 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/werewolf.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/werewolve.dart';
 
-class WerewolfKid extends Role {
+class WerewolveKid extends Role {
   @override
   Map<String, dynamic> defaultProperties = {};
 
@@ -12,17 +12,20 @@ class WerewolfKid extends Role {
   String description = "";
 
   @override
-  String name = "role.werewolf_kid";
+  String name = "role.werewolve_kid";
 
   @override
-  String group = "werewolf";
+  String group = "werewolve";
 
   @override
-  GameTime nightActionTime = GameTime.withWerewolfs;
+  GameTime nightActionTime = GameTime.withWerewolves;
+
+  @override
+  int difficultyIndex = -8;
 
   @override
   bool checkWin(GameController game, Player p) {
-    return Werewolf().checkWin(game, p);
+    return Werewolve().checkWin(game, p);
   }
 
   @override
@@ -30,17 +33,17 @@ class WerewolfKid extends Role {
     if (game.alivePlayers
         .where(
           (p2) =>
-              p2.role.name == "role.werewolf" ||
+              p2.role.name == "role.werewolve" ||
               p2.role.name == "role.lonely_wolf",
         )
         .isEmpty) {
-      Werewolf().onNightAction(game, p);
+      Werewolve().onNightAction(game, p);
     }
   }
 
   @override
   Future<void> onDeath(GameController game, Player p) async {
-    Werewolf().editPropertyForEveryWerewolf(
+    Werewolve().editPropertyForEveryWerewolve(
       game,
       "property.next_night_victim_count",
       2,

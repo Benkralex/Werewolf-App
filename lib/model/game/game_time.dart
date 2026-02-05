@@ -10,15 +10,15 @@ class GameTime {
     return (phase == 1);
   }
 
-  bool get isPreWerewolfs {
+  bool get isPreWerewolves {
     return (phase == 2);
   }
 
-  bool get isWithWerewolfs {
+  bool get isWithWerewolves {
     return (phase == 3);
   }
 
-  bool get isAfterWerewolfs {
+  bool get isAfterWerewolves {
     return (phase == 4);
   }
 
@@ -27,7 +27,7 @@ class GameTime {
   }
 
   bool get isNight {
-    return isPreWerewolfs || isWithWerewolfs || isAfterWerewolfs;
+    return isPreWerewolves || isWithWerewolves || isAfterWerewolves;
   }
 
   // GameTime constructor and controller
@@ -46,15 +46,15 @@ class GameTime {
     return GameTime(1);
   }
 
-  static GameTime get preWerewolfs {
+  static GameTime get preWerewolves {
     return GameTime(2);
   }
 
-  static GameTime get withWerewolfs {
+  static GameTime get withWerewolves {
     return GameTime(3);
   }
 
-  static GameTime get afterWerewolfs {
+  static GameTime get afterWerewolves {
     return GameTime(4);
   }
 
@@ -65,12 +65,12 @@ class GameTime {
       return "sunrise";
     } else if (isSunset) {
       return "sunset";
-    } else if (isPreWerewolfs) {
-      return "preWerewolfs";
-    } else if (isWithWerewolfs) {
-      return "withWerewolfs";
-    } else if (isAfterWerewolfs) {
-      return "afterWerewolfs";
+    } else if (isPreWerewolves) {
+      return "preWerewolves";
+    } else if (isWithWerewolves) {
+      return "withWerewolves";
+    } else if (isAfterWerewolves) {
+      return "afterWerewolves";
     } else {
       throw Exception("Unknown phase");
     }

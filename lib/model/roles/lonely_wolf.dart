@@ -1,8 +1,8 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/werewolf.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/werewolve.dart';
 
 class LonelyWolf extends Role {
   @override
@@ -18,7 +18,10 @@ class LonelyWolf extends Role {
   String group = "lonely_wolf";
 
   @override
-  GameTime nightActionTime = GameTime.withWerewolfs;
+  GameTime nightActionTime = GameTime.withWerewolves;
+
+  @override
+  int difficultyIndex = -5;
 
   @override
   bool checkWin(GameController game, Player p) {
@@ -28,9 +31,9 @@ class LonelyWolf extends Role {
   @override
   Future<void> onNightAction(GameController game, Player p) async {
     if (game.alivePlayers
-        .where((p2) => p2.role.name == "role.werewolf")
+        .where((p2) => p2.role.name == "role.werewolve")
         .isEmpty) {
-      Werewolf().onNightAction(game, p);
+      Werewolve().onNightAction(game, p);
     }
   }
 

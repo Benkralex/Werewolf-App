@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class Seerin extends Role {
   @override
@@ -19,7 +19,10 @@ class Seerin extends Role {
   String group = "villager";
 
   @override
-  GameTime nightActionTime = GameTime.preWerewolfs;
+  GameTime nightActionTime = GameTime.preWerewolves;
+
+  @override
+  int difficultyIndex = 7;
 
   @override
   bool checkWin(GameController game, Player p) {
@@ -38,7 +41,7 @@ class Seerin extends Role {
         namedArgs: {
           "name": target.name,
           "role": (target.role.name == "role.lykanthropin")
-              ? "role.werewolf".tr()
+              ? "role.werewolve".tr()
               : target.role.name.tr(),
         },
       ),

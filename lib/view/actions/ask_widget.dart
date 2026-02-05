@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:werewolve_app/view/helpers/color_helpers.dart';
 
-class AskDialog extends StatefulWidget {
+class AskWidget extends StatefulWidget {
   final String msg;
   final List<String> options;
   final String askedBy;
   final ValueChanged<String?>? onResult;
 
-  const AskDialog({
+  const AskWidget({
     super.key,
     required this.msg,
     required this.askedBy,
@@ -16,22 +17,30 @@ class AskDialog extends StatefulWidget {
   });
 
   @override
-  State<AskDialog> createState() => _AskDialogState();
+  State<AskWidget> createState() => _AskWidgetState();
 }
 
-class _AskDialogState extends State<AskDialog> {
+class _AskWidgetState extends State<AskWidget> {
   String? result;
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(widget.msg),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(widget.askedBy),
-          //SizedBox(height: 12.0),
-          RadioGroup(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(height: 20.0),
+        Text(widget.msg, style: Theme.of(context).textTheme.headlineLarge),
+        SizedBox(height: 5.0),
+        Text(
+          widget.askedBy,
+          style: TextStyle(
+            color: ColorHelpers.onSurfaceVariantColor(context),
+            fontSize: 16.0,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: RadioGroup(
             groupValue: result,
             onChanged: (String? value) {
               setState(() {
@@ -44,9 +53,15 @@ class _AskDialogState extends State<AskDialog> {
                 return Column(
                   children: [
                     ListTile(
-                      title: Text(option).tr(),
+                      title: Text(
+                        option,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ).tr(),
                       leading: Radio<String>(value: option),
                       onTap: () {
+                        if (widget.onResult != null) {
+                          widget.onResult!(option);
+                        }
                         setState(() {
                           result = option;
                         });
@@ -61,38 +76,8 @@ class _AskDialogState extends State<AskDialog> {
               }).toList(),
             ),
           ),
-        ],
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: Text('option.accept').tr(),
-          onPressed: () {
-            if (widget.onResult != null) {
-              widget.onResult!(result);
-            } else {
-              Navigator.of(context).pop(result);
-            }
-          },
         ),
       ],
     );
   }
-}
-
-Future<String?> askDialog(
-  BuildContext context,
-  String msg,
-  String askedBy,
-  List<String> options,
-) async {
-  String? result;
-  while (result == null) {
-    result = await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return AskDialog(msg: msg, askedBy: askedBy, options: options);
-      },
-    );
-  }
-  return result;
 }

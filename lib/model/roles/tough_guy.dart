@@ -1,8 +1,8 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class ToughGuy extends Role {
   @override
@@ -21,13 +21,16 @@ class ToughGuy extends Role {
   GameTime nightActionTime = GameTime.sunrise;
 
   @override
+  int difficultyIndex = 3;
+
+  @override
   bool checkWin(GameController game, Player p) {
     return Villager().checkWin(game, p);
   }
 
   @override
   Future<void> onDeath(GameController game, Player p) async {
-    if (p.killedBy?.role.name == "role.werewolf" &&
+    if (p.killedBy?.role.name == "role.werewolve" &&
         p.properties["property.diesNextSunrises"] == 0) {
       p.isAlive = true;
       p.diesAt = GameTime.sunrise;

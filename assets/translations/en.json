@@ -1,5 +1,5 @@
 {
-    "app_name": "Werewolf",
+    "app_name": "Werewolve",
     "player": "Player",
     "choose_roles": "Choose Roles",
     "choose_names": "Choose Names",
@@ -16,14 +16,9 @@
         "other": "Notes"
     },
     "edit_properties": "Edit Properties",
-    "dialog_title": {
-        "message": "Message",
-        "ask": "Question",
-        "game_finished": "Game Finished"
-    },
+    "game_finished": "Game Finished",
     "village": "Village",
     "selection": {
-        "select_player": "Select Player",
         "select_player_lynch": "Lynch",
         "first_fall_in_love": "Fall in Love (1)",
         "second_fall_in_love": "Fall in Love (2)",
@@ -46,14 +41,11 @@
         "skip": "Skip",
         "save": "Save",
         "cancel": "Cancel",
-        "accept": "OK",
-        "next": "Next",
-        "new_game": "New Game"
+        "new_game": "New Game",
+        "reset": "Reset"
     },
     "error": {
-        "min_player_count_must_be_reached": "At least 5 players must be selected to start a game.",
-        "armor_same_player_selected": "Just no...",
-        "every_player_must_have_a_name": "Every player must have a name. ({count} of {neededCount})"
+        "armor_same_player_selected": "Just no..."
     },
     "role": {
         "armor": "Armor",
@@ -65,7 +57,7 @@
         "hunter": "Hunter",
         "idiot": "Idiot",
         "lepers": "Lepers",
-        "lonely_wolf": "Lonely Werewolf",
+        "lonely_wolf": "Lonely Werewolve",
         "lykanthropin": "Lycanthrope",
         "mage": "Mage",
         "mayor": "Mayor",
@@ -79,27 +71,34 @@
         "tough_guy": "Tough Guy",
         "vampire": "Vampire",
         "villager": "Villager",
-        "werewolf_kid": "Werewolf Kid",
-        "werewolf": "Werewolf",
+        "werewolve_kid": "Werewolve Kid",
+        "werewolve": "Werewolve",
         "witch": "Witch"
+    },
+    "group": {
+        "villager": "Villager",
+        "gerber": "Gerber",
+        "lonely_wolf": "Lonely Werewolve",
+        "werewolve": "Werewolve",
+        "vampire": "Vampire"
     },
     "gametime": {
         "day": "Day",
         "night": "Night",
         "sunrise": "Sunrise",
         "sunset": "Sunset",
-        "preWerewolfs": "Pre Werewolves",
-        "withWerewolfs": "With Werewolves",
-        "afterWerewolfs": "After Werewolves"
+        "preWerewolves": "Pre Werewolves",
+        "withWerewolves": "With Werewolves",
+        "afterWerewolves": "After Werewolves"
     },
     "win_msg": "The game is finished. {winner} has won!",
     "player_dies": "{role} ({player}) dies.",
-    "witch_ask_heal_kill_msg": "Kill or heal {player}?",
-    "no_names": "No names added.",
-    "enter_player_name": "Enter player name",
+    "witch_ask_heal_kill_msg": "Victim: {player}",
     "changed_role": "{player} (previously {oldRole}) is now {newRole}.",
     "minion_will_wake_up": "(info) {player} (Minion) will wake up with the werewolves tonight.",
-    "continue_with_count": "Continue with {count} roles",
-    "too_less_roles": "Choose at least 5 roles",
-    "continue_with_names": "{count}/{maxCount} names"
+    "selected_players_count": "{count} Players",
+    "setup_role_count": "{count}/{total} Roles",
+    "add_player_name": "Add playername",
+    "select_app_color": "Choose app color",
+    "everyone_wake_up": "Everyone wakes up!"
 }

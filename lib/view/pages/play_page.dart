@@ -1,12 +1,15 @@
 import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/view/dialogs/ask_dialog.dart';
-import 'package:werewolf_app/view/pages/player_overview_page.dart';
-import 'package:werewolf_app/view/dialogs/select_player_dialog.dart';
-import 'package:werewolf_app/view/dialogs/msg_dialog.dart';
-import 'package:werewolf_app/viewmodel/main.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/view/actions/ask_action.dart';
+import 'package:werewolve_app/view/actions/game_action.dart';
+import 'package:werewolve_app/view/actions/select_player_action.dart';
+import 'package:werewolve_app/view/actions/show_msg_action.dart';
+import 'package:werewolve_app/view/actions/show_win_action.dart';
+import 'package:werewolve_app/view/pages/player_overview_page.dart';
+import 'package:werewolve_app/viewmodel/main.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({super.key});
@@ -17,23 +20,26 @@ class PlayPage extends StatefulWidget {
 
 class PlayPageState extends State<PlayPage> {
   Completer<dynamic>? _dialogCompleter;
-  Widget? _inlineDialog;
+  GameAction? action;
 
-  Future<T?> _showInlineDialog<T>(Widget dialog) {
+  Future<T?> _showInlineDialog<T>(GameAction action) {
     var completer = Completer<T?>();
     _dialogCompleter = completer;
     setState(() {
-      _inlineDialog = dialog;
+      this.action = action;
     });
     return completer.future;
   }
 
   void _closeInlineDialog(dynamic result) {
+    if (result == null) {
+      return;
+    }
     if (_dialogCompleter != null && !_dialogCompleter!.isCompleted) {
       _dialogCompleter!.complete(result);
     }
     setState(() {
-      _inlineDialog = null;
+      action = null;
       _dialogCompleter = null;
     });
   }
@@ -48,40 +54,32 @@ class PlayPageState extends State<PlayPage> {
     // Initialize callbacks for ViewModel
     ViewModel.selectPlayerCallback =
         (List<Player> players, String message, Player askingPlayer) async {
-          return await _showInlineDialog<Player>(
-            SelectPlayerDialog(
-              players: players,
-              message: message,
-              askingPlayer: askingPlayer,
-              onResult: (player) => _closeInlineDialog(player),
-            ),
-          );
+          var action = SelectPlayerAction(players, message, askingPlayer);
+          await _showInlineDialog<Player?>(action);
+          return action.getResult();
         };
     ViewModel.showMessageCallback = (String message) async {
-      await _showInlineDialog<void>(
-        MessageDialog(
-          message: message,
-          onResult: () => _closeInlineDialog(null),
-        ),
-      );
+      var action = ShowMsgAction(message, context);
+      await _showInlineDialog<void>(action);
+      return action.getResult();
     };
     ViewModel.askCallback =
         (String msg, String askedBy, List<String> options) async {
-          return await _showInlineDialog<String>(
-            AskDialog(
-              msg: msg,
-              askedBy: askedBy,
-              options: options,
-              onResult: (result) => _closeInlineDialog(result),
-            ),
-          );
+          var action = AskAction(options, msg, askedBy);
+          await _showInlineDialog<String?>(action);
+          return action.getResult();
         };
+    ViewModel.winCallback = () async {
+      var action = ShowWinAction(context);
+      await _showInlineDialog<void>(action);
+      return _closeInlineDialog(null);
+    };
   }
 
   @override
   Widget build(BuildContext context) {
     if (ViewModel.gameController == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      Navigator.of(context).pop();
     }
     // Scaffold
     return Scaffold(
@@ -104,70 +102,38 @@ class PlayPageState extends State<PlayPage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Center(
-            child: Text(
-              'gametime.${ViewModel.gameController!.gameState.time.toString()}'
-                  .tr(),
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-          if (_inlineDialog != null)
-            Container(
-              color: Colors.black54,
-              child: Center(child: _inlineDialog),
-            ),
-        ],
+      body: Column(
+        children: [Expanded(child: action?.interface ?? Container())],
       ),
-      floatingActionButton: (_inlineDialog == null)
+      floatingActionButton: (!ViewModel.gameController!.gameState.gameFinished)
           ? FloatingActionButton.large(
               onPressed: () async {
+                if (action != null) {
+                  _closeInlineDialog(action!.getResult());
+                  return;
+                }
                 bool gameFinished =
                     ViewModel.gameController!.gameState.gameFinished;
                 if (!gameFinished) {
                   await ViewModel.gameController!.next();
                   setState(() {});
                 } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('dialog_title.game_finished').tr(),
-                        content: Text(
-                          'win_msg'.tr(
-                            namedArgs: {
-                              'winner': ViewModel
-                                  .gameController!
-                                  .gameState
-                                  .winningGroups
-                                  .map((group) => "role.$group".tr())
-                                  .join(", "),
-                            },
-                          ),
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            child: const Text('option.new_game').tr(),
-                            onPressed: () async {
-                              await Navigator.of(
-                                context,
-                              ).pushNamedAndRemoveUntil(
-                                '/',
-                                (Route<dynamic> route) => false,
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                  var action = ShowWinAction(context);
+                  await _showInlineDialog<void>(action);
+                  _closeInlineDialog(null);
                 }
               },
               child: const Icon(Icons.arrow_forward),
             )
-          : null,
+          : FloatingActionButton.large(
+              onPressed: () async {
+                await Navigator.of(
+                  context,
+                ).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+              },
+              //label: Text('option.new_game').tr(),
+              child: Icon(Icons.replay),
+            ),
     );
   }
 }

@@ -1,8 +1,8 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class Priest extends Role {
   @override
@@ -18,7 +18,10 @@ class Priest extends Role {
   String name = "role.priest";
 
   @override
-  GameTime nightActionTime = GameTime.preWerewolfs;
+  GameTime nightActionTime = GameTime.preWerewolves;
+
+  @override
+  int difficultyIndex = 3;
 
   @override
   bool checkWin(GameController game, Player p) {
@@ -27,7 +30,12 @@ class Priest extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    Player target = await game.selectPlayer(game.alivePlayers, "selection.protect_player", p);
+    if (game.gameState.nightCount != 0) return;
+    Player target = await game.selectPlayer(
+      game.alivePlayers,
+      "selection.protect_player",
+      p,
+    );
     target.isProtectedAtNight = true;
     target.protectedBy = p;
   }

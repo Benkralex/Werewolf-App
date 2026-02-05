@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/roles/werewolf.dart';
-import 'package:werewolf_app/viewmodel/main.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/roles/werewolve.dart';
+import 'package:werewolve_app/viewmodel/main.dart';
 
 class PlayerOverviewPage extends StatefulWidget {
   const PlayerOverviewPage({super.key});
@@ -64,8 +64,8 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  p.name = playerName;
-                  p.notes = notes;
+                  p.name = playerName.trim();
+                  p.notes = notes.trim();
                 });
                 Navigator.of(context).pop();
               },
@@ -124,9 +124,9 @@ class _PlayerOverviewPageState extends State<PlayerOverviewPage> {
             TextButton(
               onPressed: () {
                 setState(() {
-                  if (p.role.name == "role.werewolf") {
+                  if (p.role.name == "role.werewolve") {
                     for (String key in changedProperties.keys) {
-                      Werewolf().editPropertyForEveryWerewolf(
+                      Werewolve().editPropertyForEveryWerewolve(
                         ViewModel.gameController!,
                         key,
                         changedProperties[key],

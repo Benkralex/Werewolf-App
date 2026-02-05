@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "de.benkralex" "\0"
-            VALUE "FileDescription", "werewolf_app" "\0"
+            VALUE "FileDescription", "werewolve_app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "werewolf_app" "\0"
+            VALUE "InternalName", "werewolve_app" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 de.benkralex. All rights reserved." "\0"
-            VALUE "OriginalFilename", "werewolf_app.exe" "\0"
-            VALUE "ProductName", "werewolf_app" "\0"
+            VALUE "OriginalFilename", "werewolve_app.exe" "\0"
+            VALUE "ProductName", "werewolve_app" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

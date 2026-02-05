@@ -1,7 +1,7 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
 
 class Villager extends Role {
   @override
@@ -20,9 +20,14 @@ class Villager extends Role {
   GameTime nightActionTime = GameTime.sunrise;
 
   @override
+  int difficultyIndex = 1;
+
+  @override
   bool checkWin(GameController game, Player p) {
     for (Player p2 in game.alivePlayers) {
-      if (p2.role.group != "villager" && p2.role.group != "gerber") return false;
+      if (p2.role.group != "villager" && p2.role.group != "gerber") {
+        return false;
+      }
     }
     return true;
   }

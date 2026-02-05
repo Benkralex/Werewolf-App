@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/view/helpers/color_helpers.dart';
-import 'package:werewolf_app/view/pages/play_page.dart';
-import 'package:werewolf_app/view/pages/player_overview_page.dart';
-import 'package:werewolf_app/viewmodel/main.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/view/helpers/color_helpers.dart';
+import 'package:werewolve_app/view/pages/play_page.dart';
+import 'package:werewolve_app/view/pages/player_overview_page.dart';
+import 'package:werewolve_app/viewmodel/main.dart';
 
 class SetupRolesPage extends StatefulWidget {
   const SetupRolesPage({super.key});
@@ -51,21 +51,53 @@ class SetupRolesPageState extends State<SetupRolesPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: (ViewModel.roles.isNotEmpty)
-                    ? ViewModel.roles.map((Role role) {
-                        if (roles[role] == null) {
-                          return Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: ListTile(
-                              title: Text(role.name).tr(),
-                              onTap: () {
-                                Navigator.of(context).pop(role);
-                              },
+                    ? () {
+                        // Group roles by their group
+                        Map<String, List<Role>> groupedRoles = {};
+                        for (Role role in ViewModel.roles.where(
+                          (Role role) => roles[role] == null,
+                        )) {
+                          String group = ('group.${role.group}').tr();
+                          if (!groupedRoles.containsKey(group)) {
+                            groupedRoles[group] = [];
+                          }
+                          groupedRoles[group]!.add(role);
+                        }
+
+                        // Build widgets
+                        List<Widget> widgets = [];
+                        groupedRoles.forEach((group, groupRoles) {
+                          widgets.add(
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                16.0,
+                                16.0,
+                                16.0,
+                                8.0,
+                              ),
+                              child: Text(
+                                group,
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           );
-                        } else {
-                          return Container();
-                        }
-                      }).toList()
+                          widgets.addAll(
+                            groupRoles.map((Role role) {
+                              return Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: ListTile(
+                                  title: Text(role.name).tr(),
+                                  onTap: () {
+                                    Navigator.of(context).pop(role);
+                                  },
+                                ),
+                              );
+                            }),
+                          );
+                        });
+                        return widgets;
+                      }()
                     : [
                         Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -217,7 +249,6 @@ class SetupRolesPageState extends State<SetupRolesPage> {
                   ),
                 );
               },
-              tooltip: 'option.next'.tr(),
               child: const Icon(Icons.arrow_forward),
             )
           : null,

@@ -16,14 +16,9 @@
         "other": "Notizen"
     },
     "edit_properties": "Eigenschaften bearbeiten",
-    "dialog_title": {
-        "message": "Nachricht",
-        "ask": "Frage",
-        "game_finished": "Spiel beendet"
-    },
+    "game_finished": "Spiel beendet",
     "village": "Dorf",
     "selection": {
-        "select_player": "Spieler auswählen",
         "select_player_lynch": "Lynchen",
         "first_fall_in_love": "Verlieben (1)",
         "second_fall_in_love": "Verlieben (2)",
@@ -46,8 +41,6 @@
         "skip": "Überspringen",
         "save": "Speichern",
         "cancel": "Abbrechen",
-        "accept": "OK",
-        "next": "Weiter",
         "new_game": "Neues Spiel",
         "reset": "Zurücksetzen"
     },
@@ -78,28 +71,34 @@
         "tough_guy": "Harter Bursche",
         "vampire": "Vampir",
         "villager": "Dorfbewohner",
-        "werewolf_kid": "Werwolfjunges",
-        "werewolf": "Werwolf",
+        "werewolve_kid": "Werwolfjunges",
+        "werewolve": "Werwolf",
         "witch": "Hexe"
+    },
+    "group": {
+        "villager": "Dorfbewohner",
+        "gerber": "Gerber",
+        "lonely_wolf": "Einsamer Wolf",
+        "werewolve": "Werwolf",
+        "vampire": "Vampir"
     },
     "gametime": {
         "day": "Tag",
         "night": "Nacht",
         "sunrise": "Sonnenaufgang",
         "sunset": "Sonnenuntergang",
-        "preWerewolfs": "Vor den Werwölfen",
-        "withWerewolfs": "Mit den Werwölfen",
-        "afterWerewolfs": "Nach den Werwölfen"
+        "preWerewolves": "Vor den Werwölfen",
+        "withWerewolves": "Mit den Werwölfen",
+        "afterWerewolves": "Nach den Werwölfen"
     },
     "win_msg": "Das Spiel ist beendet. {winner} hat gewonnen!",
     "player_dies": "{role} ({player}) stirbt.",
-    "witch_ask_heal_kill_msg": "{player} heilen oder töten?",
-    "no_names": "Keine Namen hinzugefügt.",
-    "enter_player_name": "Spielernamen eingeben",
+    "witch_ask_heal_kill_msg": "Opfer: {player}",
     "changed_role": "{player} (zuvor {oldRole}) ist jetzt {newRole}.",
     "minion_will_wake_up": "(Info) {player} (Günstling) wird diese Nacht mit den Werwölfen aufwachen.",
     "selected_players_count": "{count} Spieler",
     "setup_role_count": "{count}/{total} Rollen",
     "add_player_name": "Spielernamen hinzufügen",
-    "select_app_color": "App-Farbe auswählen"
+    "select_app_color": "App-Farbe auswählen",
+    "everyone_wake_up": "Alle wachen auf!"
 }

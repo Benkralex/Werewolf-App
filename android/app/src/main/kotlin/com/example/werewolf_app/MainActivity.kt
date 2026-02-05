@@ -1,4 +1,4 @@
-package de.benkralex.werewolf_app
+package de.benkralex.werewolve_app
 
 import io.flutter.embedding.android.FlutterActivity
 

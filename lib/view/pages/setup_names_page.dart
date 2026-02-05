@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:werewolf_app/main.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/view/helpers/color_helpers.dart';
-import 'package:werewolf_app/view/pages/setup_roles_page.dart';
-import 'package:werewolf_app/view/widgets/select_count_widget.dart';
-import 'package:werewolf_app/viewmodel/main.dart';
+import 'package:werewolve_app/main.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/view/helpers/color_helpers.dart';
+import 'package:werewolve_app/view/pages/setup_roles_page.dart';
+import 'package:werewolve_app/view/widgets/select_count_widget.dart';
+import 'package:werewolve_app/viewmodel/main.dart';
 
 class SetupNamesPage extends StatefulWidget {
   const SetupNamesPage({super.key});
@@ -177,10 +177,10 @@ class SetupNamesPageState extends State<SetupNamesPage> {
       bottomSheet: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Padding(
-          padding: const EdgeInsets.only(top: 24.0, bottom: 12.0),
+          padding: const EdgeInsets.only(top: 50.0, bottom: 12.0),
           child: TextField(
             focusNode: _focusNode,
-            maxLength: 20,
+            maxLength: 15,
             autofocus: true,
             controller: _controller,
             decoration: InputDecoration(
@@ -189,6 +189,7 @@ class SetupNamesPageState extends State<SetupNamesPage> {
             ),
             textInputAction: TextInputAction.done,
             onSubmitted: (String? text) {
+              text = text?.trim();
               if (text != null &&
                   text.isNotEmpty &&
                   !names.contains(text) &&

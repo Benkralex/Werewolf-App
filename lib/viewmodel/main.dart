@@ -1,32 +1,32 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/armor.dart';
-import 'package:werewolf_app/model/roles/blink_girl.dart';
-import 'package:werewolf_app/model/roles/bodyguard.dart';
-import 'package:werewolf_app/model/roles/cursed.dart';
-import 'package:werewolf_app/model/roles/gerber.dart';
-import 'package:werewolf_app/model/roles/ghost.dart';
-import 'package:werewolf_app/model/roles/hunter.dart';
-import 'package:werewolf_app/model/roles/idiot.dart';
-import 'package:werewolf_app/model/roles/lepers.dart';
-import 'package:werewolf_app/model/roles/lonely_wolf.dart';
-import 'package:werewolf_app/model/roles/lykanthropin.dart';
-import 'package:werewolf_app/model/roles/mage.dart';
-import 'package:werewolf_app/model/roles/mayor.dart';
-import 'package:werewolf_app/model/roles/minion.dart';
-import 'package:werewolf_app/model/roles/old_man.dart';
-import 'package:werewolf_app/model/roles/pacifist.dart';
-import 'package:werewolf_app/model/roles/priest.dart';
-import 'package:werewolf_app/model/roles/prince.dart';
-import 'package:werewolf_app/model/roles/seer.dart';
-import 'package:werewolf_app/model/roles/seerin.dart';
-import 'package:werewolf_app/model/roles/tough_guy.dart';
-import 'package:werewolf_app/model/roles/vampire.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
-import 'package:werewolf_app/model/roles/werewolf.dart';
-import 'package:werewolf_app/model/roles/werewolf_kid.dart';
-import 'package:werewolf_app/model/roles/witch.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/armor.dart';
+import 'package:werewolve_app/model/roles/blink_girl.dart';
+import 'package:werewolve_app/model/roles/bodyguard.dart';
+import 'package:werewolve_app/model/roles/cursed.dart';
+import 'package:werewolve_app/model/roles/gerber.dart';
+import 'package:werewolve_app/model/roles/ghost.dart';
+import 'package:werewolve_app/model/roles/hunter.dart';
+import 'package:werewolve_app/model/roles/idiot.dart';
+import 'package:werewolve_app/model/roles/lepers.dart';
+import 'package:werewolve_app/model/roles/lonely_wolf.dart';
+import 'package:werewolve_app/model/roles/lykanthropin.dart';
+import 'package:werewolve_app/model/roles/mage.dart';
+import 'package:werewolve_app/model/roles/mayor.dart';
+import 'package:werewolve_app/model/roles/minion.dart';
+import 'package:werewolve_app/model/roles/old_man.dart';
+import 'package:werewolve_app/model/roles/pacifist.dart';
+import 'package:werewolve_app/model/roles/priest.dart';
+import 'package:werewolve_app/model/roles/prince.dart';
+import 'package:werewolve_app/model/roles/seer.dart';
+import 'package:werewolve_app/model/roles/seerin.dart';
+import 'package:werewolve_app/model/roles/tough_guy.dart';
+import 'package:werewolve_app/model/roles/vampire.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/roles/werewolve.dart';
+import 'package:werewolve_app/model/roles/werewolve_kid.dart';
+import 'package:werewolve_app/model/roles/witch.dart';
 
 class ViewModel {
   static GameController? gameController;
@@ -54,8 +54,8 @@ class ViewModel {
     ToughGuy(),
     Vampire(),
     Villager(),
-    WerewolfKid(),
-    Werewolf(),
+    WerewolveKid(),
+    Werewolve(),
     Witch(),
   ];
 
@@ -83,6 +83,11 @@ class ViewModel {
     List<String> options,
   ) async {
     return await askCallback?.call(msg, askedBy, options);
+  }
+
+  static Function? winCallback;
+  static Future<void> showWin() async {
+    return await winCallback?.call();
   }
 
   static List<String> playerNames = [];

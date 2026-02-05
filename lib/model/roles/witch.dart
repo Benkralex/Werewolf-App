@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
-import 'package:werewolf_app/model/roles/villager.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
+import 'package:werewolve_app/model/roles/villager.dart';
 
 class Witch extends Role {
   @override
@@ -22,7 +22,10 @@ class Witch extends Role {
   String group = "villager";
 
   @override
-  GameTime nightActionTime = GameTime.afterWerewolfs;
+  GameTime nightActionTime = GameTime.afterWerewolves;
+
+  @override
+  int difficultyIndex = 4;
 
   @override
   bool checkWin(GameController game, Player p) {
@@ -38,7 +41,7 @@ class Witch extends Role {
       if (p2.role.name == "role.old_man" &&
           game.gameState.nightCount ==
               game.players
-                  .where((p2) => p2.role.name == "role.werewolf")
+                  .where((p2) => p2.role.name == "role.werewolve")
                   .length) {
         continue;
       }
@@ -53,7 +56,7 @@ class Witch extends Role {
       if (action == "option.kill") {
         game.killPlayer(
           await game.selectPlayer(
-            game.alivePlayers,
+            game.alivePlayers.where((pl) => pl != p2 && pl != p).toList(),
             "selection.select_player_kill",
             p,
           ),

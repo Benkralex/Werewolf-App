@@ -1,7 +1,7 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
 
 class Gerber extends Role {
   @override
@@ -18,6 +18,9 @@ class Gerber extends Role {
 
   @override
   GameTime nightActionTime = GameTime.sunrise;
+
+  @override
+  int difficultyIndex = 1;
 
   bool hasWon = false;
 

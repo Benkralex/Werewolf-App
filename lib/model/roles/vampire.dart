@@ -1,7 +1,7 @@
-import 'package:werewolf_app/model/game/game_controller.dart';
-import 'package:werewolf_app/model/game/game_time.dart';
-import 'package:werewolf_app/model/player/player.dart';
-import 'package:werewolf_app/model/player/role.dart';
+import 'package:werewolve_app/model/game/game_controller.dart';
+import 'package:werewolve_app/model/game/game_time.dart';
+import 'package:werewolve_app/model/player/player.dart';
+import 'package:werewolve_app/model/player/role.dart';
 
 class Vampire extends Role {
   @override
@@ -17,16 +17,21 @@ class Vampire extends Role {
   String group = "vampire";
 
   @override
-  GameTime nightActionTime = GameTime.withWerewolfs;
+  GameTime nightActionTime = GameTime.withWerewolves;
+
+  @override
+  int difficultyIndex = -8;
 
   @override
   bool checkWin(GameController game, Player p) {
     int count = 0;
-    bool werewolfsArePlaying = game.playingRoles.any((role) => role.group == "werewolf");
+    bool werewolvesArePlaying = game.playingRoles.any(
+      (role) => role.group == "werewolve",
+    );
     for (Player p2 in game.alivePlayers) {
       if (p2.role.group == "vampire") count++;
     }
-    if (werewolfsArePlaying) {
+    if (werewolvesArePlaying) {
       return count == game.alivePlayers.length;
     } else {
       return (count) >= (game.alivePlayers.length / 2);
@@ -35,7 +40,11 @@ class Vampire extends Role {
 
   @override
   Future<void> onNightAction(GameController game, Player p) async {
-    Player target = await game.selectPlayer(game.alivePlayers.where((i) => i.role.group != 'vampire').toList(), "selection.select_player_kill", p);
+    Player target = await game.selectPlayer(
+      game.alivePlayers.where((i) => i.role.group != 'vampire').toList(),
+      "selection.select_player_kill",
+      p,
+    );
     game.killPlayer(target, p, GameTime.sunset);
   }
 
