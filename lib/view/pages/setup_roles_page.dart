@@ -179,8 +179,25 @@ class SetupRolesPageState extends State<SetupRolesPage> {
                               widgets.add(
                                 Visibility(
                                   visible: expandedGroups[group] ?? false,
-                                  child: Column(
-                                    children: rolesToSelect[group] ?? [],
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                    ),
+                                    child: Wrap(
+                                      children: (rolesToSelect[group] ?? [])
+                                          .map((widget) {
+                                            return SizedBox(
+                                              width:
+                                                  (MediaQuery.of(
+                                                        context,
+                                                      ).size.width -
+                                                      16) /
+                                                  2,
+                                              child: widget,
+                                            );
+                                          })
+                                          .toList(),
+                                    ),
                                   ),
                                 ),
                               );
